@@ -1,21 +1,57 @@
-<!DOCTYPE HTML>
-<html xmlns:th="https://www.thymeleaf.org">
-<head> 
-    <title>Register for speedy code</title>
-    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Formulario Speedy Code</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="" th:href="@{css/style.css}"/>
 </head>
 <body>
-	<h1>Form</h1>
-    
-    <form action="/register" method="post">
-    <label for="mail">Email:</label> <br/>
-    <input type="text" name="mail" required> <br/>
-
-    <label for="password">Password:</label> <br/>
-    <input type="text" name="password" required> <br/>
-
-    <button type="submit">Submit</button>
-
-    </form>
+    <div class="container">
+        <div class="formulario_ingreso_cuenta">
+            <h1 class="formulario">Inicio de sesión</h1>
+            <form method="post">
+                <div class="username"> 
+                    <input type="email" placeholder=" " required>
+                    <label>Correo electrónico</label>
+                    <span></span>
+                </div>
+                <div class="contrasena">  
+                    <input type="password" placeholder=" " required> 
+                    <label>Contraseña</label>
+                    <span></span>
+                </div>
+                <div class="recordar">¿Olvidó su contraseña?</div>
+                <input type="submit" value="Iniciar">          
+            </form>
+        </div>
+        <div class="vertical-line"></div>
+        <div class="formulario_crear_cuenta">
+            <h1 class="formulario">Crear una cuenta</h1>
+            <form method="post">
+                <div class="username">
+                    <input type="email" placeholder=" " required>
+                    <label>Correo electrónico</label>
+                    <span></span>
+                </div>
+                <div class="contrasena">
+                    <input type="password" placeholder=" " required> 
+                    <label>Contraseña</label>
+                    <span></span>
+                </div>
+                <br><br>
+                <input type="submit" value="Registrarse">  
+            </form>           
+        </div>
+    </div>
+    <div class="downbox">
+        <hr>
+        <h3 class="down">SpeedyCode</h3><br><br>
+        <img alt="logo-speedy-code" src="img/facebook.png" class="iconoprimero">
+        <img alt="logo-speedy-code" src="img/linkedin.png" class="icono">
+        <img alt="logo-speedy-code" src="img/youtube.png" class="icono">
+        <img alt="logo-speedy-code" src="img/instagram.png" class="icono">
+    </div>
 </body>
-</html> 
+</html>
+

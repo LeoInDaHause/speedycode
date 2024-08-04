@@ -1,12 +1,16 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <link rel="stylesheet" type="text/css" href="/src/main/resources/templates/style.css">
-    </head>
-    <body>
-    <body>
-        <title>Error</title>
-        <h1>Paht not found</h1>
-        <h1>Prueba con el root "/"</h1>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="" th:href="@{css/style.css}"/>
+    
+<head>
+    <title>Error Page</title>
+</head>
+<body>
+    <h1 th:text="${errorMessage}">Error occurred</h1>
+    <p th:text="${errorDetails}">Details about the error</p>
+    <a th:href="@{/}">Go to Home</a>
+</body>
 </html>

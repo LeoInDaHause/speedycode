@@ -15,6 +15,9 @@ public class mainController {
     public String register() {
         return "register";
     }
-
     
+    @GetMapping("/difficulty")
+    public String difficulty() {
+        return "difficulty";
+    }   
 }
