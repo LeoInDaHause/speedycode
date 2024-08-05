@@ -10,14 +10,14 @@
     <div class="container">
         <div class="formulario_ingreso_cuenta">
             <h1 class="formulario">Inicio de sesión</h1>
-            <form method="post">
+            <form action="login-user" method="post"></form>
                 <div class="username"> 
-                    <input type="email" placeholder=" " required>
+                    <input type="email" placeholder=" " required name="email">
                     <label>Correo electrónico</label>
                     <span></span>
                 </div>
                 <div class="contrasena">  
-                    <input type="password" placeholder=" " required> 
+                    <input type="password" placeholder=" " required name="password"> 
                     <label>Contraseña</label>
                     <span></span>
                 </div>
@@ -28,15 +28,15 @@
         <div class="vertical-line"></div>
         <div class="formulario_crear_cuenta">
             <h1 class="formulario">Crear una cuenta</h1>
-            <form method="post">
+            <form action="register-user" method="post">
                 <div class="username">
-                    <input type="email" placeholder=" " required>
-                    <label>Correo electrónico</label>
+                    <input type="email" placeholder=" " required  name="email">
+                    <label for="email">Correo electrónico</label>
                     <span></span>
                 </div>
                 <div class="contrasena">
-                    <input type="password" placeholder=" " required> 
-                    <label>Contraseña</label>
+                    <input type="password" placeholder=" " required  name="password"> 
+                    <label for="password">Contraseña</label>
                     <span></span>
                 </div>
                 <br><br>
