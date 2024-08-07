@@ -31,6 +31,6 @@ We recommend using an IDE like IntelliJ IDEA or Eclipse, but you can use any IDE
 5. Open the Database Console at [http://localhost:8080/h2](http://localhost:8080/h2-console). The Dtabase has a default configuration:
     * JDBC URL: jdbc:h2:mem:testdb
     * User Name: sa (default can [custom] in the property "spring.datasource.username = sa"(https://github.com/LeoInDaHause/speedycode/blob/main/target/classes/application.properties) at application.properties)
-    * Password: (Default has none password but you can [custom](https://github.com/LeoInDaHause/speedycode/blob/main/target/classes/application.properties)() in the property "spring.datasource.username = sa")
+    * Password: (Default has none password but you can [custom](https://github.com/LeoInDaHause/speedycode/blob/main/target/classes/application.properties) in the property "spring.datasource.username = sa")
 
 
