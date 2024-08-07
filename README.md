@@ -28,6 +28,6 @@ We recommend using an IDE like IntelliJ IDEA or Eclipse, but you can use any IDE
 2. Open the project in your IDE.
 3. Run the project.
 4. Open your browser and go to [http://localhost:8080](http://localhost:8080).
-5. Open the Database Console at [http://localhost:8080/h2-console](http://localhost:8080/h2-console).
+5. Open the Database Console at [http://localhost:8080/h2](http://localhost:8080/h2-console).
 
 
