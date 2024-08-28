@@ -6,20 +6,19 @@ on:
       - main
 
 jobs:
-  build:
+  release:
     runs-on: ubuntu-latest
+    name: Build, package and upload .jar artifact
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      - name: Build Spring Boot Image
-        id: build
-        uses: teheidoma/spring-boot-image-build-action@0.0.3
-        with:
-          jdk_dist: '22-maven'
-          registry_username: ${{ secrets.REGISTRY_USERNAME }}
-          registry_password: ${{ secrets.REGISTRY_PASSWORD }}
-          registry_hostname: 'docker.io'
-          include_commit_sha: 'true'
-      - name: Upload Image to Registry
-        run: echo "Upload image ${{ steps.build.outputs.tag }}:${{ steps.build.outputs.image_tag }} to registry."
-          
+    - uses: actions/checkout@v1
+    - name: Set up JDK 21
+      uses: actions/setup-java@v1
+      with:
+        java-version: 21
+    - name: Build and package project
+      run: mvn -f pom.xml package
+    - name: Upload Maven build artifact
+      uses: actions/upload-artifact@v1
+      with:
+        name: artifact
+        path: ./target/spring-github-actions-demo-0.1.jar
