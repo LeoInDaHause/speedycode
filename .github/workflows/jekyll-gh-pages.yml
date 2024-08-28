@@ -21,4 +21,4 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: artifact
-        path: ./target/spring-github-actions-demo-0.1.jar
+        path: ./target/classes/io/leoindahause/speedy_code/SpeedyCodeApplication.class
