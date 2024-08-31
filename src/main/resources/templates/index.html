@@ -1,34 +1,42 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"></html>
     <head>
-        <title>Speedy Code</title>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="" th:href="@{css/style.css}"/>
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" type="text/css" href="config/style_index.css" th:href="@{config/style_index.css}"/>
+
+        <title>Speedy Code</title>
+
+        <meta name="robots" content="noindex, nofollow">
+        <meta name="theme-color" content="#09f">
     </head>
-    
+
     <body>
-        <div class="header">
-            <h1> Speedy Code </h1>
-            <div>
-                <a th:href="@{/register}"  class="iniciose"> <h3 class="inicio"> iniciar sesión </h3></a>
+        <header>
+            <h1>Speedy Code</h1>
+            <a class="button" href="/register.html" th:href="@{/register}">Iniciar Sesion / Log In</a>
+        </header>
+        <hr class="separator">
+        <main>
+            <h2>Bienvenido a Speedy Code !!</h2>
+            <div class="text">
+                <p>La página que te ayudará a mejorar tu velocidad y precisión a la hora de escribir en el teclado</p>
+                <p>Convierte en un programador agil y eficiente, capaz de escribir un código rápido y sin errores</p>
+                <br>
+                <h3> Haz click en comenzar! para Empezar</h3>
+                <a class="button" href="dificulty.html" th:href="@{/dificulty.html}">Comenzar</a>
             </div>
-        </div>
-        <hr>
-        <div class="header">
-            <div class="header2">
-                <pre>Bienvenido a Speedy Code!<br><br>La página que te ayudará a mejorar tu velocidad y precisión a
-                    la hora de escribir en el teclado<br><br>Convierte en un programador agil y eficiente, capaz de escribir 
-                    un código rápido y sin errores<br><br>Haz click en comenzar! para Empezar<br><br></pre> 
-                <div>
-                    <a th:href="@{/difficulty}" class="starbox"> <h3 class="star"> comenzar </h3> </a>
-                </div>
-            </div>
-            <img alt="logo-speedy-code" src="img/speedycode_logo.png" class="logo">
-        </div>
-        <div class="downbox">
-            <hr>
-            <h3 class="down">SpeedyCode</h3><br><br>
-        </div>
+            <aside> <img src="img/speedycode_logo.png" alt="ejemplo"></aside>
+
+        </main>
+
+        <footer>
+            <strong>Speedy code @2024 y sus creadores:</strong> <br> <br>
+            <hr class="separator" style="background-color: #2e5870;">
+            <br>
+            <div class="additional"><a href="https://github.com/yetanotherusername"><img src="img/facebook.png" alt="GitHub Logo"></a> Cesar Rodriguez</div>
+            <div class="additional"><a href="https://github.com/yetanotherusername"><img src="img/facebook.png" alt="GitHub Logo"></a> Ana Molina</div>
+            <div class="additional"><a href="https://github.com/yetanotherusername"><img src="img/facebook.png" alt="GitHub Logo"></a> Diego Carvajal</div>
+        </footer>
     </body>
-</html>
+</html> 

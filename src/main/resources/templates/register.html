@@ -1,57 +1,66 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Formulario Speedy Code</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="" th:href="@{css/style.css}"/>
-</head>
-<body>
-    <div class="container">
-        <div class="formulario_ingreso_cuenta">
-            <h1 class="formulario">Inicio de sesión</h1>
-            <form action="login-user" method="post"></form>
-                <div class="username"> 
-                    <input type="email" placeholder=" " required name="email">
-                    <label>Correo electrónico</label>
-                    <span></span>
-                </div>
-                <div class="contrasena">  
-                    <input type="password" placeholder=" " required name="password"> 
-                    <label>Contraseña</label>
-                    <span></span>
-                </div>
-                <div class="recordar">¿Olvidó su contraseña?</div>
-                <input type="submit" value="Iniciar">          
+<html xmlns:th="http://www.thymeleaf.org">  
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" type="text/css" href="config/style_register.css" th:href="@{config/style_register.css}"/>
+
+        <title>Speedy Code</title>
+
+        <meta name="robots" content="noindex, nofollow">
+        <meta name="theme-color" content="#09f">
+    </head>
+
+    <body>
+        <h1>Ingresa a speedy code</h1>
+        <main>
+            <form id="login" action="login_user" method="post" >
+                <h2>Iniciar Seccion</h2>
+                <label for="email">Correo:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" name="password" required>
+
+                <button type="submit">Log In</button>
             </form>
-        </div>
-        <div class="vertical-line"></div>
-        <div class="formulario_crear_cuenta">
-            <h1 class="formulario">Crear una cuenta</h1>
-            <form action="register-user" method="post">
-                <div class="username">
-                    <input type="email" placeholder=" " required  name="email">
-                    <label for="email">Correo electrónico</label>
-                    <span></span>
-                </div>
-                <div class="contrasena">
-                    <input type="password" placeholder=" " required  name="password"> 
-                    <label for="password">Contraseña</label>
-                    <span></span>
-                </div>
-                <br><br>
-                <input type="submit" value="Registrarse">  
-            </form>           
-        </div>
-    </div>
-    <div class="downbox">
-        <hr>
-        <h3 class="down">SpeedyCode</h3><br><br>
-        <img alt="logo-speedy-code" src="img/facebook.png" class="iconoprimero">
-        <img alt="logo-speedy-code" src="img/linkedin.png" class="icono">
-        <img alt="logo-speedy-code" src="img/youtube.png" class="icono">
-        <img alt="logo-speedy-code" src="img/instagram.png" class="icono">
-    </div>
-</body>
+
+            <hr class="separator">
+
+            <form id="register" action="register_user" method="post">
+                <h2>Registrarse</h2>
+                <label for="register_email">Correo:</label>
+                <input type="email" id="register_email" name="email" required>
+
+                <label for="register_password">Contraseña:</label>
+                <input type="password" id="register_password" name="password" required>
+
+                <label for="conf_password">Confirma la Contraseña:</label>
+                <input type="password" id="conf_password" name="conf_password" required>
+                <p id="error-message" class="error-message"></p>
+
+                <button type="submit">Register</button>
+            </form>
+        </main>
+
+        <footer>
+            <h3>Speed Code @2024</h3>
+        </footer>
+
+        <script>
+            document.getElementById('register').addEventListener('submit', function(event) {
+                var password = document.getElementById('register_password').value;
+                var conf_password = document.getElementById('conf_password').value;
+                var errorMessage = document.getElementById('error-message');
+
+                if (password !== conf_password) {
+                    event.preventDefault();
+                    errorMessage.textContent = 'Las contraseñas no coinciden';
+                } else {
+                    errorMessage.textContent = '';
+                }
+            });
+        </script>
+    </body>
 </html>
 

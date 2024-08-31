@@ -16,7 +16,7 @@ public class mainController {
     private Person_rep person_rep;
 
     @GetMapping("/")
-    public String index() {
+    public String index() { 
         return "index";
     }
     
@@ -25,7 +25,7 @@ public class mainController {
         return "register";
     }
 
-    @PostMapping("/register-user")
+    @PostMapping("/register_user")
     public String registerPost(@ModelAttribute Person person, org.springframework.ui.Model model) {
         System.out.println(person.toString());
     

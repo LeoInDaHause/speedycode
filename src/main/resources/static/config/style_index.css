@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Julius+Sans+One&display=swap');
+
+:root{
+  margin: 0;
+}
+
+body {
+  background-color: #2A2A2B;
+  color: #cccccc;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  height: 100vh;
+  margin: 0 0 0;
+  font-family: "Julius Sans One", sans-serif;
+
+}
+
+header {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size:larger;
+}
+
+h1 {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+}
+
+.button {
+  padding: 15px;
+  border-radius: 15px;
+  border: none;
+  cursor: pointer;
+  background-color: #18B0B0;
+  transition: background-color 0.7s ease;
+  font-size: smaller;
+  font-family: "Inter", sans-serif;
+  text-decoration: none;
+  color: inherit;
+}
+
+header .button {
+  margin-right: 20px;
+  font-family: "Inter", sans-serif;
+}
+.separator {
+  border: none;
+  height: 2px;
+  background-color: #ffffff;
+  margin: 0 25px;
+}
+
+.button:hover {
+  background-color: #46D1D1;
+}
+
+main {
+  overflow: auto;
+  padding: 40px;
+  display: grid;
+  grid-template-rows: 1fr 1fr 10fr;
+  grid-template-columns: 2fr 1fr;
+  grid-template-areas:
+  "header ."
+  "text image"
+  "add .";
+  align-items: start;
+  gap: 0;
+}
+
+h2 {
+  grid-area: header;
+  padding: 20px;
+  margin: 0;
+  text-align: center;
+}
+
+p {
+  margin-top: 0;
+  text-align: center;
+  line-height: 1.6;
+  font-size: 18px;
+}
+
+.text {
+  grid-area: text;
+  margin: 0;
+  padding: 20px;
+  word-wrap: break-word;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center; 
+}
+
+main aside {
+  grid-area: image;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+main .text .button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 0px;
+  max-width: 300px;
+  text-align: center;
+}
+
+main .text h3 {
+  margin-top: 50px;
+  text-align: center;
+}
+
+main aside img {
+  width: 50%;
+  height: 50%;
+  object-fit: contain;
+}
+
+footer {
+  background: #18b0b0;
+  padding: 20px;
+}
+
+footer .additional {
+  display: flex;
+  padding: 4px;
+  font-size: 13px;
+  align-items: center;
+  color: #03202c;
+}
+
+footer .additional img {
+  width: 20px;
+  height: 20px;
+  margin-right: 15px;
+  object-fit: contain;
+}

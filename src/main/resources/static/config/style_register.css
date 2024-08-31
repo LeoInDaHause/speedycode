@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Julius+Sans+One&display=swap');
+
+body {
+    background-color: #2A2A2B;
+    font-family: "Julius Sans One", sans-serif;
+    color: #cccccc;
+    margin: 0;
+    display: grid;
+    min-height: 100vh;
+    grid-template-rows: 100px 1fr 100px;
+    grid-template-areas:
+        "header"
+        "main"
+        "footer";
+}
+
+h1 {
+    grid-area: header;
+    text-align: center;
+    padding: 20px;
+    margin: 0;
+}
+
+main {
+    margin-top: 5vh;
+    grid-area: main;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+form {
+    background-color: #3e3e41;
+    display: flex;
+    flex-direction: column;
+    row-gap: 0px;
+    padding: 30px;
+    width: 40%;
+    max-height: 80%;
+    margin: 0;
+    border-radius: 15px;
+}
+
+form h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+form label {
+    font-size: 18px;
+    padding: 10px;
+    height: min-content;
+}
+
+form input {
+    padding: 0 5px;
+    height: 40px;
+    font-size: 16px;
+    border: none;
+    border-bottom: 2px solid #CCCCCC;
+    background: none;
+    outline: none;
+    color: #000000;
+    margin-bottom: 5vh;
+}
+
+button {
+    background-color: #18B0B0;
+    padding: 15px;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #46D1D1;
+}
+
+hr {
+    margin-left: 5%;
+    margin-right: 5%;
+    height: 55vh;
+    border: 3px solid #cccccc;
+    border-radius: 15px;
+}
+
+footer {
+    display: flex;
+    border-top: 3px solid #ffffff;
+    height: 90px;
+    grid-area: footer;
+    background-color: #18B0B0;
+    align-items: center;
+    justify-content: center;
+}
+
+h3 {
+    font-family: 'Julius Sans One', sans-serif;
+    font-size: 18px;
+    margin: 0;
+}
+
+.error-message {
+    color: #ff0000;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
+}
