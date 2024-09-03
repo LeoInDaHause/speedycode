@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" type="text/css" href="config/style_user.css" th:href="@{config/style_user.css}"/>
+
+        <title>Speedy Code</title>
+
+        <meta name="robots" content="noindex, nofollow">
+        <meta name="theme-color" content="#09f">
+    </head>
+
+    <body>
+        <header>
+            <h1>Speedy CODE</h1>
+            <a class="button" href="index.html" th:href="@{/index}">Cerrar Sesión</a>
+        </header>
+
+        <main>
+            <h2>Configuracion Speedy Code</h2>
+            <div class="container">
+                <h3>Correo:</h3>
+                <p th:text="${email}"></p>
+
+                <form id="emailForm">
+                    <label for="correo">Cambiar Correo:</label>
+                    <input type="email" id="correo" name="correo" required>
+
+                    <label for="con_correo">Confirmar Correo:</label>
+                    <input type="email" id="con_correo" name="con_correo" required>
+
+                    <p id="error-message1" class="error-message"></p>
+
+                    <input type="submit" value="Cambiar" id="conf">
+                </form>
+            </div>
+
+            <div class="container">
+                <h3> Cambiar Contraseña:</h3>
+
+                <form id="passwordForm">
+                    <label for="password">Ingrese contraseña actual:</label>
+                    <input type="password" id="current_password" name="current_password" required>
+
+                    <label for="new_password">Cambiar Contraseña:</label>
+                    <input type="password" id="new_password" name="new_password" required>
+
+                    <label for="con_password">Confirmar Contraseña:</label>
+                    <input type="password" id="con_password" name="con_password" required>
+
+                    <p id="error-message2" class="error-message"></p>
+
+                    <input type="submit" value="Cambiar" id="conf">
+                </form>
+            </div>
+
+            <a class="button" id="dificulty" href="difficulty.html" th:href="@{/difficulty}">Actividades</a>
+
+        </main>
+
+        <footer>
+            <h3>Speedy Code @2024</h3>
+        </footer>
+
+        <script>
+            document.getElementById('emailForm').addEventListener('submit', function(event) {
+                var password = document.getElementById('correo').value;
+                var conf_password = document.getElementById('con_correo').value;
+                var errorMessage = document.getElementById('error-message1');
+
+                if (password !== conf_password) {
+                    event.preventDefault();
+                    errorMessage.textContent = 'Las contraseñas no coinciden';
+                } else {
+                    errorMessage.textContent = '';
+                }
+            });
+
+            document.getElementById('passwordForm').addEventListener('submit', function(event) {
+                var password = document.getElementById('new_password').value;
+                var conf_password = document.getElementById('con_password').value;
+                var errorMessage = document.getElementById('error-message2');
+
+                if (password !== conf_password) {
+                    event.preventDefault();
+                    errorMessage.textContent = 'Las contraseñas no coinciden';
+                } else {
+                    errorMessage.textContent = '';
+                }
+            });
+        </script>
+
+    </body>
+</html>

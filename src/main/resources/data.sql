@@ -1,0 +1,1 @@
+INSERT INTO person (id, email, password, exercise_status_id) VALUES (0, NULL, NULL, NULL);

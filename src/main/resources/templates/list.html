@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" type="text/css" href="config/style_list.css" th:href="@{config/style_list.css}"/>
+
+        <title>Speedy Code</title>
+
+        <meta name="robots" content="noindex, nofollow">
+        <meta name="theme-color" content="#09f">
+    </head>
+
+    <body>
+        <header>
+            <h1>Speedy Code</h1>
+            <a class="button" href="register.html">Log in</a>
+            <div class="container">
+                <a href="user.html" th:href="@{/user}"><img src="/config/img/user.png" th:src="@{/config/img/user.png}" alt="imagen" class="imagen"></a>
+                <p th:text="${email}"></p>
+            </div>
+        </header>
+
+        <main>
+            <h2>Listado de Ejercicios</h2>
+            <div class="list" id="easy">
+
+                <h3 style="background-color: #00ff40da;">Facil</h3>
+                <div class="block">
+                    
+                    <a href="exercise.html" th:href="@{/exercise}">Ejercicio  1</a>
+                    <p>No Completado</p>
+                </div>
+                
+                <div class="block">
+                    <a href="exercise.html" th:href="@{/exercise}">Ejercicio 2</a>
+                    <p style="background-color: #18b0b070; color: rgb(255, 255, 255);">Completado</p>
+                </div>
+
+                <div class="block">
+                    <a href="exercise.html" th:href="@{/exercise}">Ejercicio 3</a>
+                    <p>No Completado</p>
+                </div>
+
+                <div class="block">
+                    <a href="exercise.html" th:href="@{/exercise}">Ejercicio 4</a>
+                    <p>No Completado</p>
+                </div>
+            </div>
+
+            <div class="list" id="medium">
+
+                <h3 style="background-color: #ffd000da;">Intermedio</h3>
+                <div class="block">
+                    <a href="exercise.html" th:href="@{/exercise}">Ejercicio 1</a>
+                    <p>No Completado</p>
+                </div>
+                
+                <div class="block">
+                    <a href="exercise.html" th:href="@{/exercise}">Ejercicio 2</a>
+                    <p>No Completado</p>
+                </div>
+
+                <div class="block">
+                    <a href="exercise.html" th:href="@{/exercise}">Ejercicio 3</a>
+                    <p>No Completado</p>
+                </div>
+
+                <div class="block">
+                    <a href="exercise.html" th:href="@{/exercise}">Ejercicio 4</a>
+                    <p>No Completado</p>
+                </div>
+
+
+            </div>
+
+            <div class="list" id="hard">
+
+                <h3 style="background-color: #ff0000ea;">Dificil</h3>
+                <div class="block">
+                    <a href="exercise.html" th:href="@{/exercise}">Ejercicio 1</a>
+                    <p>No Completado</p>
+                </div>
+                
+                <div class="block">
+                    <a href="exercise.html" th:href="@{/exercise}">Ejercicio 2</a>
+                    <p>No Completado</p>
+                </div>
+
+                <div class="block">
+                    <a href="exercise.html" th:href="@{/exercise}">Ejercicio 3</a>
+                    <p>No Completado</p>
+                </div>
+
+                <div class="block">
+                    <a href="exercise.html" th:href="@{/exercise}">Ejercicio 4</a>
+                    <p>No Completado</p>
+                </div>
+            </div>
+  
+            </div>
+        </main>
+
+        <footer>
+            <h4>Speedy Code @2024</h4>
+        </footer>
+    </body>
+</html>

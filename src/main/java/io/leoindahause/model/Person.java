@@ -1,14 +1,9 @@
 package io.leoindahause.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name = "user_data")
+@Table(name = "person")
 public class Person {
 
     @Id
@@ -21,6 +16,10 @@ public class Person {
 
     @Column(name = "password")
     private String password;
+
+    @OneToOne
+    @JoinColumn(name = "exercise_status_id")
+    private ExerciseStatus exerciseStatus;
 
     public int getId() {
         return id;
@@ -42,12 +41,21 @@ public class Person {
         this.password = password;
     }
 
-    @Override
-    public String toString() {
-        return "Person{" +
-                "id=" + id +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+    public ExerciseStatus getExerciseStatus() {
+        return exerciseStatus;
     }
+
+    public void setExerciseStatus(ExerciseStatus exerciseStatus) {
+        this.exerciseStatus = exerciseStatus;
+    }
+
+    @Override
+public String toString() {
+    return "{" +
+            "\"id\": " + id +
+            ", \"email\": \"" + email + "\"" +
+            ", \"password\": \"" + password + "\"" +
+            ", \"exerciseStatus\": " + (exerciseStatus != null ? exerciseStatus.getId() : "null") +
+            '}';
+}
 }

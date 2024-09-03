@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"></html>
+<html xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
@@ -24,19 +24,22 @@
                 <p>Convierte en un programador agil y eficiente, capaz de escribir un código rápido y sin errores</p>
                 <br>
                 <h3> Haz click en comenzar! para Empezar</h3>
-                <a class="button" href="dificulty.html" th:href="@{/dificulty.html}">Comenzar</a>
+                <a class="button" href="difficulty.html" th:href="@{/difficulty}">Comenzar</a>
             </div>
-            <aside> <img src="img/speedycode_logo.png" alt="ejemplo"></aside>
+            
+            <aside>
+                <img src="/config/img/speedycode_logo.png" alt="ejemplo" th:src="@{/config/img/speedycode_logo.png}">
+            </aside>
 
-        </main>
+        </main> 
 
         <footer>
             <strong>Speedy code @2024 y sus creadores:</strong> <br> <br>
             <hr class="separator" style="background-color: #2e5870;">
             <br>
-            <div class="additional"><a href="https://github.com/yetanotherusername"><img src="img/facebook.png" alt="GitHub Logo"></a> Cesar Rodriguez</div>
-            <div class="additional"><a href="https://github.com/yetanotherusername"><img src="img/facebook.png" alt="GitHub Logo"></a> Ana Molina</div>
-            <div class="additional"><a href="https://github.com/yetanotherusername"><img src="img/facebook.png" alt="GitHub Logo"></a> Diego Carvajal</div>
+            <div class="additional"><a href="https://github.com/LeoInDaHause"><img src="/config/img/github_logo.png" th:src="@{/config/img/github_logo.png}" alt="GitHub Logo"></a> Cesar Rodriguez</div>
+            <div class="additional"><a href="https://github.com/yetanotherusername"><img src="/config/img/github_logo.png" th:src="@{/config/img/github_logo.png}"></a> Ana Molina</div>
+            <div class="additional"><a href="https://github.com/yetanotherusername"><img src="/config/img/github_logo.png" th:src="@{/config/img/github_logo.png}" alt="GitHub Logo"></a> Diego Carvajal</div>
         </footer>
     </body>
 </html> 
