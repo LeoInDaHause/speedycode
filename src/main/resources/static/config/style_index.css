@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Julius+Sans+One&display=swap');
 
-:root{
+:root {
   margin: 0;
 }
 
@@ -11,50 +11,67 @@ body {
   display: grid;
   grid-template-rows: auto 1fr auto;
   height: 100vh;
-  margin: 0 0 0;
+  margin: 0;
   font-family: "Julius Sans One", sans-serif;
-
 }
 
 header {
-  padding: 20px;
+  padding: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size:larger;
 }
 
 h1 {
-  margin: 0;
+  color: #CCCCCC;
+  margin: 0 0 0 50px;
   font-family: "Inter", sans-serif;
+  font-weight: bold;
+  font-size: 60px;
 }
 
-.button {
-  padding: 15px;
-  border-radius: 15px;
-  border: none;
-  cursor: pointer;
-  background-color: #18B0B0;
-  transition: background-color 0.7s ease;
-  font-size: smaller;
-  font-family: "Inter", sans-serif;
+a.button {
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: #18B0B0; 
+  transition: background-color 0.5s ease; 
+  color: #000000;
+  font-family: "Julius Sans One", sans-serif; 
   text-decoration: none;
-  color: inherit;
 }
 
-header .button {
-  margin-right: 20px;
-  font-family: "Inter", sans-serif;
+.button.login {
+  width: 165px;
+  height: 52px; 
+  font-size: 16px;
 }
-.separator {
-  border: none;
-  height: 2px;
-  background-color: #ffffff;
-  margin: 0 25px;
+
+.button.comenzar {
+  width: 600px;
+  height: 62px;
+  font-size: 27px;
 }
+
 
 .button:hover {
   background-color: #46D1D1;
+  box-shadow: 0 4px 9px rgba(0, 0, 0, 0.1);
+}
+
+header .button {
+  margin-right: 30px;
+  font-size: 20px; 
+}
+
+.separator {
+  color: #CCCCCC;
+  border-width: 1px;
+  width: 93vw; 
+  max-width: 1260px; 
+  margin: 0 auto;
 }
 
 main {
@@ -72,15 +89,15 @@ main {
 }
 
 h2 {
-  grid-area: header;
-  padding: 20px;
-  margin: 0;
-  text-align: center;
+  font-size: 30px;
+  font-weight: 250;
+  margin: -5px 0px 0px 20px;
+  text-align: left;
 }
 
 p {
   margin-top: 0;
-  text-align: center;
+  text-align: left;
   line-height: 1.6;
   font-size: 18px;
 }
@@ -114,8 +131,9 @@ main .text .button {
 }
 
 main .text h3 {
-  margin-top: 50px;
-  text-align: center;
+  margin-top: 10px;
+  text-align: left;
+  font-weight: 600;
 }
 
 main aside img {
@@ -142,4 +160,10 @@ footer .additional img {
   height: 20px;
   margin-right: 15px;
   object-fit: contain;
+}
+.final{
+  color: #000000;
+  margin-bottom: 0;
+  font-size: 15px;
+  font-family: "Julius Sans One", sans-serif; 
 }

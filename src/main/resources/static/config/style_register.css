@@ -1,18 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Julius+Sans+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
 body {
     background-color: #2A2A2B;
-    font-family: "Julius Sans One", sans-serif;
-    color: #cccccc;
+    font-family: "Inter", sans-serif;
+    color: #CCCCCC;
     margin: 0;
     display: grid;
     min-height: 100vh;
     grid-template-rows: 100px 1fr 100px;
-    grid-template-areas:
-        "header"
-        "main"
-        "footer";
+    grid-template-areas: "header" "main" "footer";
 }
 
 h1 {
@@ -23,82 +19,138 @@ h1 {
 }
 
 main {
-    margin-top: 5vh;
     grid-area: main;
     display: flex;
     justify-content: center;
     padding: 20px;
 }
 
-form {
-    background-color: #3e3e41;
+.container {
     display: flex;
-    flex-direction: column;
-    row-gap: 0px;
-    padding: 30px;
-    width: 40%;
-    max-height: 80%;
-    margin: 0;
-    border-radius: 15px;
+    justify-content: space-between; 
+    align-items: flex-start; 
+    flex-wrap: nowrap; 
+    gap: 20px; 
+    width: 100%; 
 }
 
-form h2 {
+.formulario {
+    margin: 0 40px;
+    flex: 1 1 auto;
+    max-width: 480px;
+    min-width: 350px;
+    height: 380px;
+    background: rgba(72, 78, 79, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.vertical-line {
+    height: 350px;
+    width: 2px;
+    background-color: #18B0B0;
+    margin: 15px 0;
+}
+
+h2 {
     text-align: center;
-    margin-bottom: 30px;
+    padding: 0 0 15px 0;
+    border-bottom: 1px solid #CCCCCC;
+    color: #CCCCCC;
+    font-size: 24px;
 }
 
-form label {
-    font-size: 18px;
-    padding: 10px;
-    height: min-content;
+.input-group {
+    position: relative;
+    margin: 20px 0;
 }
 
-form input {
+.input-group label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 16px;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.input-group input {
+    width: 100%;
     padding: 0 5px;
     height: 40px;
     font-size: 16px;
     border: none;
-    border-bottom: 2px solid #CCCCCC;
     background: none;
     outline: none;
-    color: #000000;
-    margin-bottom: 5vh;
+    border-bottom: 2px solid #CCCCCC;
 }
 
-button {
-    background-color: #18B0B0;
-    padding: 15px;
-    border-radius: 15px;
-    border: none;
+.input-group span::before {
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: #18B0B0;
+    transition: .5s;
+}
+
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown) + label {
+    top: -5px;
+    color: #18B0B0;
+}
+
+.input-group input:focus + span::before,
+.input-group input:not(:placeholder-shown) + span::before {
+    width: 100%;
+}
+
+.recordar {
+    font-family: "Julius Sans One", sans-serif;
+    margin: 20px;
+    color: #18B0B0;
     cursor: pointer;
 }
 
-button:hover {
-    background-color: #46D1D1;
+.recordar:hover {
+    text-decoration: underline;
 }
 
-hr {
-    margin-left: 5%;
-    margin-right: 5%;
-    height: 55vh;
-    border: 3px solid #cccccc;
-    border-radius: 15px;
+input[type="submit"] {
+    width: 100%;
+    height: 50px;
+    border: 1px solid #214766;
+    background: #18B0B0;
+    border-radius: 25px;
+    font-size: 18px;
+    color: whitesmoke;
+    cursor: pointer;
+    outline: none;
+}
+
+input[type="submit"]:hover {
+    border-color: #60B7BD;
+    transition: .5s;
 }
 
 footer {
-    display: flex;
-    border-top: 3px solid #ffffff;
-    height: 90px;
     grid-area: footer;
     background-color: #18B0B0;
+    display: flex;
     align-items: center;
     justify-content: center;
+    height: 90px;
 }
 
 h3 {
-    font-family: 'Julius Sans One', sans-serif;
-    font-size: 18px;
-    margin: 0;
+    font-family: "Julius Sans One", sans-serif;
+    font-size: 16px;
+    color: #000000;
 }
 
 .error-message {
