@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.ui.Model;
 
 import io.leoindahause.model.Person;
 import io.leoindahause.repository.Person_rep;
@@ -19,9 +20,6 @@ public class mainController {
 
     @GetMapping({"/", "/index", "/index/"})
     public String root() {
-        if (user == null) {
-            user = setGuest();
-        }
         return "index";
     }
     
@@ -31,45 +29,40 @@ public class mainController {
     }
 
     @PostMapping({"/register_user", "/register_user/"})
-    public String registerPost(@ModelAttribute Person person, org.springframework.ui.Model model) {
+    public String registerPost(@ModelAttribute Person person, Model model) {
         System.out.println(person.toString());
-    
+
+        // Save the person and set the user object
         Person person_in = person_rep.save(person);
-        model.addAttribute("email", user.getEmail()); 
-        
-        user = person_in;   
-        return "successful"; 
+        user = person_in;
+
+        // Add the email to the model
+        if (user != null) {
+            model.addAttribute("email", user.getEmail());
+        } else {
+            model.addAttribute("email", "Guest");
+        }
+
+        return "user";
     }
 
     @GetMapping({"/difficulty", "/difficulty/"})
     public String difficulty() {
         return "difficulty";
-    } 
+    }
 
     @GetMapping({"/list", "/list/"})
     public String list() {
         return "list";
     }
-    
+
     @GetMapping({"/user", "/user/"})
-    public String user() {
-        return "user";
-    }
-    
-    @GetMapping({"/exercise", "/exercise/"})
-    public String exersise() {
-        return "exercise";
-    }
-    
-    public Person setGuest() {
-        Person guestUser = person_rep.findById(0).orElse(null);
-
-        if (guestUser != null) {
-            System.out.println(guestUser);
+    public String user(Model model) {
+        if (user != null) {
+            model.addAttribute("email", user.getEmail());
         } else {
-            System.out.println("Guest user not found.");
+            model.addAttribute("email", "Guest");
         }
-
-        return guestUser;
+        return "user";
     }
 }
