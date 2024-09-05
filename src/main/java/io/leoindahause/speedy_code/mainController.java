@@ -28,19 +28,17 @@ public class mainController {
         return "register";
     }
 
-    @PostMapping({"/register_user", "/register_user/"})
+    @PostMapping({"/register_user"})
     public String registerPost(@ModelAttribute Person person, Model model) {
         System.out.println(person.toString());
 
-        // Save the person and set the user object
         Person person_in = person_rep.save(person);
         user = person_in;
 
-        // Add the email to the model
         if (user != null) {
             model.addAttribute("email", user.getEmail());
         } else {
-            model.addAttribute("email", "Guest");
+            return "login";
         }
 
         return "user";
@@ -64,5 +62,10 @@ public class mainController {
             model.addAttribute("email", "Guest");
         }
         return "user";
+    }
+
+    @GetMapping({"/error"})
+    public String error(){
+        return "error";
     }
 }
