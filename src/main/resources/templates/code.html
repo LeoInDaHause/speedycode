@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Speedy code</title>
+    <style>
+        :root {
+            color-scheme: light dark;
+            --green: #00b755;
+            --yellow: #daaf38;
+            --red: #ca4754;
+            --black: #222;
+            --grey: #999;
+            --white: #FFFFFF;
+            --cyan: #b2ece1;
+            --blue: #1E3A5F;
+        }
+        
+        div{
+            color: var(--cyan);
+            font-size: 40px;
+            
+        }
+
+        body {
+            background: var(--black);
+            font-size: 25px;
+            font-family: Menlo, monospace;
+            display: grid;
+            padding: 32px;
+            justify-content: center;
+            margin-top: 32px;
+        }
+        
+        time{
+            color: var(--cyan);
+            font-size: 35px;
+        }
+        
+        input {
+            z-index: -999;
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            /*opacity: 0;*/
+        }
+
+        p {
+            display: block;
+            margin: 0;
+            white-space: pre-wrap;
+            font-family: monospace;
+            color: var(--white);
+        }
+
+        word {
+            display: inline-block; 
+            white-space: nowrap;
+            border-bottom: 2.5px solid transparent;
+            transition: border-color 0.3s ease-in-out;
+            &.marked {
+                border-color: var(--red);
+            }
+        }
+
+        letter {
+            display: inline-block; 
+            white-space: nowrap; 
+        }
+
+        letter.correct {
+            color: var(--green);
+        }
+
+        letter.incorrect {
+            color: var(--red); 
+        }
+
+        letter.active::before {
+            content: '|';
+            font-size: 25px;
+            color: var(--cyan);
+            position: absolute;
+            animation: 1s blink infinite ease-in-out;
+        }
+
+        #game {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        #results {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+        }
+        
+        h2 {
+            font-weight: 400;
+            opacity: .4;
+            margin: 0;
+            font-size: 30px;
+            color: white;
+            text-align: center;
+        }
+
+        h3 {
+            font-weight: 400;
+            margin: 0;
+            font-size: 30px;
+            color: var(--cyan);
+            text-align: center;
+        }
+
+        button {
+            background: transparent;
+            border: 0;
+            margin-top: 32px;
+            padding: 8px;
+            opacity: .4;
+            display: inline-block;
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+            cursor: pointer;
+            border-radius: 16px;
+        }
+
+        button:hover {
+            background: #444;
+            opacity: 1;
+            scale: 110%;
+        }
+
+        @keyframes blink {
+            0%, 25% {
+                opacity: 1;
+            }
+            70% {
+                opacity: 0;
+            }
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div>Speedy code</div>
+    <main>
+        <section id="game">
+            <time></time>
+            <p></p>
+            <input autofocus>
+        </section>
+        <section id="results">
+            <h2>wpm</h2>
+            <h3 id="results-wpm"></h3>
+            
+            <h2>accuracy</h2>
+            <h3 id="results-accuracy"></h3>
+            
+            <button id="reload-button">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M19.933 13.041a8 8 0 1 1 -9.925 -8.788c3.899 -1 7.935 1.007 9.425 4.747" />
+                    <path d="M20 4v5h-5" />
+                </svg>
+            </button>
+        </section>
+    </main>
+    <script src="script.js" defer></script>
+</body>
+</html>

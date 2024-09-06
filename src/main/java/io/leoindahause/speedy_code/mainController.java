@@ -2,14 +2,13 @@ package io.leoindahause.speedy_code;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.ui.Model;
 
 import io.leoindahause.model.Person;
 import io.leoindahause.repository.Person_rep;
-
 
 @Controller
 public class mainController {
@@ -18,17 +17,17 @@ public class mainController {
     private Person_rep person_rep;
     private Person user;
 
-    @GetMapping({"/", "/index", "/index/"})
+    @GetMapping({ "/", "/index", "/index/" })
     public String root() {
         return "index";
     }
-    
-    @GetMapping({"/register", "/register/"})
+
+    @GetMapping({ "/register", "/register/" })
     public String register() {
         return "register";
     }
 
-    @PostMapping({"/register_user"})
+    @PostMapping({ "/register_user" })
     public String registerPost(@ModelAttribute Person person, Model model) {
         System.out.println(person.toString());
 
@@ -44,17 +43,17 @@ public class mainController {
         return "user";
     }
 
-    @GetMapping({"/difficulty", "/difficulty/"})
+    @GetMapping({ "/difficulty", "/difficulty/" })
     public String difficulty() {
         return "difficulty";
     }
 
-    @GetMapping({"/list", "/list/"})
+    @GetMapping({ "/list", "/list/" })
     public String list() {
         return "list";
     }
 
-    @GetMapping({"/user", "/user/"})
+    @GetMapping({ "/user", "/user/" })
     public String user(Model model) {
         if (user != null) {
             model.addAttribute("email", user.getEmail());
@@ -64,8 +63,13 @@ public class mainController {
         return "user";
     }
 
-    @GetMapping({"/error"})
-    public String error(){
+    @GetMapping({ "/error" })
+    public String error() {
         return "error";
+    }
+
+    @GetMapping("/code")
+    public String code() {
+        return "code";
     }
 }

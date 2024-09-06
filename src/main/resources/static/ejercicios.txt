@@ -1,0 +1,117 @@
+public class Greeting {
+    private String name;
+    public Greeting(String name) {
+        this.name = name;
+    }
+    public void sayHello() {
+        System.out.println("Hola, " + name + "! Bienvenido al mundo de Java.");
+    }
+    public static void main(String[] args) {
+        Greeting greeting = new Greeting("Pablito");
+        greeting.sayHello();
+    }
+}
+
+public class Calculator {
+    public int add(int a, int b) {
+        return a + b;
+    }
+    public int subtract(int a, int b) {
+        return a - b;
+    }
+    public static void main(String[] args) {
+        Calculator calculator = new Calculator();
+        System.out.println("5 + 3 = " + calculator.add(5, 3));
+        System.out.println("5 - 3 = " + calculator.subtract(5, 3));
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        for (int i = 1; i <= 10; i++) {
+            System.out.println(i);
+        }
+    }
+}
+
+import java.util.Scanner;
+public class Suma {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Ingresa el primer número:");
+        int num1 = scanner.nextInt();
+        System.out.println("Ingresa el segundo número:");
+        int num2 = scanner.nextInt();
+        int suma = num1 + num2;
+        System.out.println("La suma es: " + suma);
+    }
+}
+
+import java.util.Scanner;
+public class ParImpar {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Ingresa un número:");
+        int num = scanner.nextInt();
+        if (num % 2 == 0) {
+            System.out.println("El número es par.");
+        } else {
+            System.out.println("El número es impar.");
+        }
+    }
+}
+
+import java.util.Scanner;
+public class Factorial {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Ingresa un número:");
+        int num = scanner.nextInt();
+        int factorial = 1;
+        for (int i = 1; i <= num; i++) {
+            factorial *= i;
+        }
+        System.out.println("El factorial de " + num + " es: " + factorial);
+    }
+}
+
+import java.util.Scanner;
+public class Palindromo {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Ingresa una palabra:");
+        String palabra = scanner.nextLine();
+        String palabraInvertida = new StringBuilder(palabra).reverse().toString();
+        if (palabra.equals(palabraInvertida)) {
+            System.out.println("La palabra es un palíndromo.");
+        } else {
+            System.out.println("La palabra no es un palíndromo.");
+        }
+    }
+}
+
+public class Fibonacci {
+    public static void main(String[] args) {
+        int num1 = 0, num2 = 1;
+        System.out.print("Los primeros 10 números de Fibonacci son: ");
+        for (int i = 1; i <= 10; i++) {
+            System.out.print(num1 + " ");
+            int siguiente = num1 + num2;
+            num1 = num2;
+            num2 = siguiente;
+        }
+    }
+}
+
+public class MayorEnArreglo {
+    public static void main(String[] args) {
+        int[] numeros = {5, 3, 9, 2, 10, 7};
+        int mayor = numeros[0];
+        for (int num : numeros) {
+            if (num > mayor) {
+                mayor = num;
+            }
+        }
+        System.out.println("El número mayor es: " + mayor);
+    }
+}
