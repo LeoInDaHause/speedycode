@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return fetch('ejercicios.txt')
             .then(response => response.text())
             .then(text => {
-                exercises = text.split('\n\n');
+                exercises = text.replace(/\r\n/g, '\n').split(/\n\s*\n/);
             })
             .catch(error => console.error('Error al cargar ejercicios:', error));
     }
