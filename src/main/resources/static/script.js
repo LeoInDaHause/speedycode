@@ -258,6 +258,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const wpm = correctWords * 60 / INITIAL_TIME;
         $wpm.textContent = wpm;
         $accuracy.textContent = `${accuracy.toFixed(2)}%`;
+
+        const instructions = document.getElementById('instructions');
+        if (instructions) {
+            instructions.style.display = 'none';
+        }
     }
 
     loadExercises().then(() => {
