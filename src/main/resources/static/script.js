@@ -39,6 +39,11 @@ document.addEventListener('DOMContentLoaded', function() {
         $results.style.display = 'none';
         $input.value = '';
 
+        const instructions = document.getElementById('instructions');
+        if (instructions) {
+            instructions.style.display = 'block';
+        }
+
         const TEXT = getRandomExercise();
         const lines = TEXT.split('\n');  
         currentTime = INITIAL_TIME;
