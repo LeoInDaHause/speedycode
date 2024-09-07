@@ -9,6 +9,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const $button = document.querySelector('#reload-button');
 
     const INITIAL_TIME = 30;
+
+    const instructions = document.getElementById('instructions');
+    if (instructions) {
+        instructions.classList.add('instructions');
+    }
+
     let exercises = [];
     let currentTime = INITIAL_TIME;
     let intervalId = null;
