@@ -31,3 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Dev Container ###
+.devcontainer/
+
+### Git Hub ###
+.github/
