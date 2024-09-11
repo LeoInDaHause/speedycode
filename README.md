@@ -21,7 +21,7 @@ The dependencies are:
 
 We recommend using an IDE like IntelliJ IDEA or Eclipse, but you can use any IDE you prefer. One of the developers uses VSCode with the Java Extension Pack and the Spring Boot Extension Pack.
 
-1. Clone the repository(Make sure you have [Git](https://git-scm.com/downloads) install:
+1. Clone the repository (Make sure you have [Git](https://git-scm.com/downloads)) install:
     ```bash
     git clone https://github.com/LeoInDaHause/speedycode.git
     ```
