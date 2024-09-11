@@ -37,3 +37,7 @@ build/
 
 ### Git Hub ###
 .github/
+
+### DataBase ###
+testdb.mv.db
+.target/
