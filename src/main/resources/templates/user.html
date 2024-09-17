@@ -14,14 +14,14 @@
     <body>
         <header>
             <h1>Speedy CODE</h1>
-            <a class="button" href="index.html" th:href="@{/index}">Cerrar Sesión</a>
+            <a class="button" href="index.html" th:href="@{/log_out}">Cerrar Sesión</a>
         </header>
 
         <main>
             <h2>Configuracion Speedy Code</h2>
             <div class="container">
                 <h3>Correo:</h3>
-                <p th:text="${email}"></p>
+                <p th:text="${userEmail}"></p>
 
                 <form id="emailForm">
                     <label for="correo">Cambiar Correo:</label>

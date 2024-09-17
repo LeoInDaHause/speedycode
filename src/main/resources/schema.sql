@@ -1,6 +1,24 @@
-CREATE TABLE IF NOT EXISTS person (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+-- Create the User table
+CREATE TABLE IF NOT EXISTS users (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(255),
-    password VARCHAR(255),
-    exercise_status_id INT
+    password VARCHAR(255)
+);
+
+-- Create the Exercise table
+CREATE TABLE IF NOT EXISTS exercise_status (
+    user_id BIGINT PRIMARY KEY,
+    easy_1 BOOLEAN DEFAULT FALSE,
+    easy_2 BOOLEAN DEFAULT FALSE,
+    easy_3 BOOLEAN DEFAULT FALSE,
+    easy_4 BOOLEAN DEFAULT FALSE,
+    medium_1 BOOLEAN DEFAULT FALSE,
+    medium_2 BOOLEAN DEFAULT FALSE,
+    medium_3 BOOLEAN DEFAULT FALSE,
+    medium_4 BOOLEAN DEFAULT FALSE,
+    hard_1 BOOLEAN DEFAULT FALSE,
+    hard_2 BOOLEAN DEFAULT FALSE,
+    hard_3 BOOLEAN DEFAULT FALSE,
+    hard_4 BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (user_id) REFERENCES users(id)
 );
