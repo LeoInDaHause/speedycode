@@ -12,8 +12,11 @@ import io.leoindahause.model.User;
 import io.leoindahause.repository.UserRepository;
 import io.leoindahause.model.Exercise;
 import io.leoindahause.repository.ExerciseRepository;
+
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
+
+
 
 @Controller
 public class mainController {
@@ -30,7 +33,13 @@ public class mainController {
     }
 
     @GetMapping({ "/register", "/register/" })
-    public String register() {
+    public String register(HttpSession session, Model model) {
+
+        if (session.getAttribute("user") != null) {
+            model.addAttribute("userEmail", ((User) session.getAttribute("user")).getEmail());
+            return "user";
+        }
+
         return "register";
     }
 
@@ -50,7 +59,8 @@ public class mainController {
 
         if (emailExists) {
             model.addAttribute("errorMessage", "El correo electrónico ya existe.");
-            return "register"; 
+            return "register";
+             
         } else {
             User user = new User();
             user.setEmail(email);
@@ -70,7 +80,7 @@ public class mainController {
         }
     }
 
-    @PostMapping({"/login_user", "/login"})
+    @PostMapping({"/login_user"})
     public String login(@RequestParam String email, @RequestParam String password, Model model, HttpSession session) {
         User user = userRepository.findByEmail(email);
 
@@ -95,6 +105,60 @@ public class mainController {
         }
 
         return "register";
+    }
+
+    @PostMapping("/change_email")
+    @Transactional
+    public String changeEmail(@RequestParam String email, @RequestParam String conf_email, HttpSession session, Model model) {
+        User user = (User) session.getAttribute("user");
+    
+        if (!email.equals(conf_email)) {
+            model.addAttribute("userEmail", user.getEmail());
+            model.addAttribute("errorMessage1", "Los correos electrónicos no coinciden.");
+            return "user";
+        }
+    
+        if (userRepository.existsByEmail(email)) {
+            model.addAttribute("userEmail", user.getEmail());
+            model.addAttribute("errorMessage1", "El correo electrónico ya existe.");
+            return "user";
+        }
+        
+        try {
+            user.setEmail(email);
+            userRepository.save(user);
+        
+            session.setAttribute("user", user); 
+            model.addAttribute("userEmail", user.getEmail());
+            model.addAttribute("infoMessage1", "Correo electrónico actualizado correctamente.");
+        } catch (Exception e) {
+            model.addAttribute("errorMessage1", "Error al actualizar el correo electrónico. Por favor, inténtelo de nuevo.");
+            return "user";
+        }
+    
+        return "user";
+    }
+
+    @PostMapping("/change_password")
+    @Transactional
+    public String changePassword(@RequestParam String current_password, @RequestParam String new_password, @RequestParam String conf_password, HttpSession session, Model model) {
+        User user = (User) session.getAttribute("user");
+
+        if (!user.getPassword().equals(current_password)) {
+            model.addAttribute("errorMessage2", "Contraseña actual incorrecta.");
+            return "user";
+        }
+
+        if (!new_password.equals(conf_password)) {
+            model.addAttribute("errorMessage2", "Las contraseñas no coinciden.");
+            return "user";
+        }
+
+        user.setPassword(conf_password);
+        userRepository.save(user);
+        model.addAttribute("infoMessage2", "Contraseña actualizada correctamente.");
+
+        return "user";
     }
 
     @GetMapping({ "/difficulty", "/difficulty/" })
