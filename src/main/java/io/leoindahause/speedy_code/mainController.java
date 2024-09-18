@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import io.leoindahause.model.User;
 import io.leoindahause.repository.UserRepository;
+import io.leoindahause.model.Exercise;
+import io.leoindahause.repository.ExerciseRepository;
 import jakarta.servlet.http.HttpSession;
-
+import jakarta.transaction.Transactional;
 
 @Controller
 public class mainController {
@@ -19,6 +21,8 @@ public class mainController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private ExerciseRepository exerciseRepository;
 
     @GetMapping({ "/", "/index", "/index/" })
     public String root() {
@@ -31,26 +35,37 @@ public class mainController {
     }
 
     @PostMapping("/register_user")
+    @Transactional
     public String registerUser(@RequestParam String email, @RequestParam String password, @RequestParam String conf_password, Model model, HttpSession session) {
+        if (!password.equals(conf_password)) {
+            model.addAttribute("errorMessage", "Las contraseñas no coinciden.");
+            return "register";
+        }
+        
         if (session.getAttribute("user") != null) {
             return "user";
         }
-    
+
         boolean emailExists = userRepository.existsByEmail(email);
 
         if (emailExists) {
             model.addAttribute("errorMessage", "El correo electrónico ya existe.");
             return "register"; 
-
         } else {
             User user = new User();
             user.setEmail(email);
             user.setPassword(password);
-            userRepository.save(user);
+        
+            user = userRepository.save(user); // Ensure user is fully persisted and get the updated user object
+            
+            Exercise exercise = new Exercise();
+            exercise.setUser(user);
 
+            exerciseRepository.save(exercise);
+            
             session.setAttribute("user", user);
             model.addAttribute("userEmail", user.getEmail());
-
+        
             return "user";
         }
     }
@@ -109,12 +124,6 @@ public class mainController {
         return "error";
     }
 
-    @ExceptionHandler(Exception.class)
-    public String handleException(Exception ex, Model model) {
-        model.addAttribute("errorMessage", ex.getMessage());
-        return "error";
-    }
-
     @GetMapping("/code")
     public String code() {
         return "code";
@@ -124,5 +133,11 @@ public class mainController {
     public String logOut(HttpSession session) {
         session.removeAttribute("user");
         return "index";
+    }
+    
+    @ExceptionHandler(Exception.class)
+    public String handleException(Exception ex, Model model) {
+        model.addAttribute("errorMessage", ex.getMessage());
+        return "error";
     }
 }

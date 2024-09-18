@@ -1,4 +1,3 @@
--- Create the User table
 CREATE TABLE IF NOT EXISTS users (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(255),
@@ -6,7 +5,7 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 -- Create the Exercise table
-CREATE TABLE IF NOT EXISTS exercise_status (
+CREATE TABLE IF NOT EXISTS exercises_status (
     user_id BIGINT PRIMARY KEY,
     easy_1 BOOLEAN DEFAULT FALSE,
     easy_2 BOOLEAN DEFAULT FALSE,

@@ -3,7 +3,7 @@ package io.leoindahause.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "exercise_status")
+@Table(name = "exercises_status")
 public class Exercise {
 
     @Id
