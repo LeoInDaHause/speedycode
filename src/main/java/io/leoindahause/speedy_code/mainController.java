@@ -108,15 +108,35 @@ public class mainController {
         return "difficulty";
     }
 
-    @GetMapping({ "/list", "/list/" })
+    @GetMapping({ "/list", "/list/" }) 
     public String list(Model model, HttpSession session) {
         User user = (User) session.getAttribute("user");
+        Exercise exercise = null;
 
         if (user != null) {
             model.addAttribute("userEmail", user.getEmail());
+            exercise = exerciseRepository.findByUserId(user.getId());
         }
 
+        if (exercise == null) {
+            exercise = new Exercise();
+        }
+        
+        model.addAttribute("color1", getColor(exercise.isExercise1()));
+        model.addAttribute("color2", getColor(exercise.isExercise2()));
+        model.addAttribute("color3", getColor(exercise.isExercise3()));
+        model.addAttribute("color4", getColor(exercise.isExercise4()));
+        model.addAttribute("color5", getColor(exercise.isExercise5()));
+        model.addAttribute("color6", getColor(exercise.isExercise6()));
+        model.addAttribute("color7", getColor(exercise.isExercise7()));
+        model.addAttribute("color8", getColor(exercise.isExercise8()));
+        model.addAttribute("color9", getColor(exercise.isExercise9()));
+        model.addAttribute("color10", getColor(exercise.isExercise10()));
+        model.addAttribute("color11", getColor(exercise.isExercise11()));
+        model.addAttribute("color12", getColor(exercise.isExercise12()));
+
         return "list";
+        
     }
 
     @GetMapping({ "/error" })
@@ -139,5 +159,13 @@ public class mainController {
     public String handleException(Exception ex, Model model) {
         model.addAttribute("errorMessage", ex.getMessage());
         return "error";
+    }
+
+    public String getColor(Boolean value) {
+        if (value) {
+            return "completed";
+        } else {    
+            return "not_completed";
+        }
     }
 }
