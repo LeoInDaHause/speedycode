@@ -119,4 +119,10 @@ public class mainController {
     public String code() {
         return "code";
     }
+
+    @GetMapping("/log_out")
+    public String logOut(HttpSession session) {
+        session.removeAttribute("user");
+        return "index";
+    }
 }
