@@ -4,7 +4,7 @@ This is a small project about a web page that helps you improve your programming
 
 ## Dependencies
 
-This project is a web app. For the backend, we use Java. While Java may not be the most common choice for web development, we are learning Java and Object-Oriented Programming, so we decided it is the best fit for this project. For the frontend, we use HTML, CSS, and JavaScript. 
+This project is a web app. For the backend, we use Java. While Java may not be the most common choice for web development, we are learning OOP, so we decided it is the best fit for this project. For the frontend, we use HTML, CSS, and JavaScript. 
 
 The dependencies are:
 
@@ -19,7 +19,7 @@ The dependencies are:
 
 ## How to Run the Project
 
-We recommend using an IDE like IntelliJ IDEA or Eclipse, but you can use any IDE you prefer. One of the developers uses VSCode with the Java Extension Pack and the Spring Boot Extension Pack.
+We recommend using an IDE like IntelliJ IDEA or Eclipse, but you can use anyone. I use VScode with the extension for java and Spring booot.
 
 1. Clone the repository (Make sure you have [Git](https://git-scm.com/downloads)) install:
     ```bash
