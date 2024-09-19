@@ -1,4 +1,4 @@
-# Speedy Code (Web Project using Java, yes java :v)
+# Speedy Code (Web Project using Java)
 
 This is a small project about a web page that helps you improve your programming skills and become faster at typing. If you want to contribute to this project, feel free to make a pull request! :D
 
