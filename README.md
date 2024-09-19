@@ -19,7 +19,7 @@ The dependencies are:
 
 ## How to Run the Project
 
-We recommend using an IDE like IntelliJ IDEA or Eclipse, but you can use anyone. I use VScode with the extension for java and Spring booot.
+We recommend using an IDE like IntelliJ IDEA or Eclipse, but you can use anyone. I use VScode with the extension for java and Spring MVC.
 
 1. Clone the repository (Make sure you have [Git](https://git-scm.com/downloads)) install:
     ```bash
@@ -29,6 +29,7 @@ We recommend using an IDE like IntelliJ IDEA or Eclipse, but you can use anyone.
 3. Run the project.
 4. Open your browser and go to [http://localhost:8080](http://localhost:8080).
 5. Open the Database Console at [http://localhost:8080/h2](http://localhost:8080/h2-console). The DB has a default configuration:
+   
     * JDBC URL: jdbc:h2:mem:testdb
     * User Name: sa (default can [custom](https://github.com/LeoInDaHause/speedycode/blob/main/target/classes/application.properties) in the property "spring.datasource.username = sa" at application.properties)
     * Password: (Default has none password but you can [custom](https://github.com/LeoInDaHause/speedycode/blob/main/target/classes/application.properties) in the property "spring.datasource.username = sa")
