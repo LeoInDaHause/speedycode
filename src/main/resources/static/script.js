@@ -173,6 +173,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 const classToAdd = MissedL ? 'marked' : 'correct';
                 $currentWord.classList.add(classToAdd);
+                
+                if (isLastCharacter($nextWord, $nextLetter)) {
+                    gameOver();
+                }
+
                 return;
             }
         }
@@ -250,9 +255,21 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             $currentLetter.classList.add('active', 'is-last');
         }
+
+        if (isLastCharacter($nextWord, $nextLetter)) {
+            gameOver();
+        }
+    }
+
+    function isLastCharacter($currectWord, $nextLetter) {
+        const $lastWord = $p.querySelector('word:last-of-type');
+        const $lastLetter = $lastWord.querySelector('letter:last-of-type');
+
+        return $currectWord === $lastWord && $nextLetter === $lastLetter;
     }
 
     function gameOver() {
+        clearInterval(intervalId);
         $game.style.display = 'none';
         $results.style.display = 'flex';
 
@@ -267,7 +284,7 @@ document.addEventListener('DOMContentLoaded', function() {
             : 0;
 
         const cpm = correctLetter * 60 / INITIAL_TIME;
-        $cpm.textContent = cpm.toFixed(2);
+        $cpm.textContent = cpm;
         $accuracy.textContent = `${accuracy.toFixed(2)}%`;
 
         const instructions = document.getElementById('instructions');
