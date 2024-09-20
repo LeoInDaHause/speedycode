@@ -30,10 +30,20 @@
             justify-content: center;
             margin-top: 32px;
         }
+
+        .instructions {
+            font-size: 18px;
+            color: var(--grey); /* Ajusta según tu preferencia */
+            margin-top: 8px;    /* Margen superior para separar del título */
+            margin-bottom: 16px; /* Margen inferior para separar del tiempo */
+            text-align: center; /* Para centrar el texto */
+        }
         
         time{
+            display: block;
             color: var(--cyan);
             font-size: 35px;
+            margin-bottom: 20px;
         }
         
         input {
@@ -147,6 +157,9 @@
 </head>
 <body>
     <div>Speedy code</div>
+    <div id="instructions" class="instructions">
+        "Espacio" -> pasar de palabra / "Enter" -> pasar de línea / "Retroceso" -> retroceder palabra / "0" -> devolverte de línea
+    </div>
     <main>
         <section id="game">
             <time></time>

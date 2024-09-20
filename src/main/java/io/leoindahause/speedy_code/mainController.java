@@ -4,18 +4,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import io.leoindahause.model.Person;
-import io.leoindahause.repository.Person_rep;
+import io.leoindahause.model.User;
+import io.leoindahause.repository.UserRepository;
+import io.leoindahause.model.Exercise;
+import io.leoindahause.repository.ExerciseRepository;
+
+import jakarta.servlet.http.HttpSession;
+import jakarta.transaction.Transactional;
+
+
 
 @Controller
 public class mainController {
 
     @Autowired
-    private Person_rep person_rep;
-    private Person user;
+    private UserRepository userRepository;
+
+    @Autowired
+    private ExerciseRepository exerciseRepository;
 
     @GetMapping({ "/", "/index", "/index/" })
     public String root() {
@@ -23,44 +33,174 @@ public class mainController {
     }
 
     @GetMapping({ "/register", "/register/" })
-    public String register() {
+    public String register(HttpSession session, Model model) {
+
+        if (session.getAttribute("user") != null) {
+            model.addAttribute("userEmail", ((User) session.getAttribute("user")).getEmail());
+            return "user";
+        }
+
         return "register";
     }
 
-    @PostMapping({ "/register_user" })
-    public String registerPost(@ModelAttribute Person person, Model model) {
-        System.out.println(person.toString());
-
-        Person person_in = person_rep.save(person);
-        user = person_in;
-
-        if (user != null) {
-            model.addAttribute("email", user.getEmail());
-        } else {
-            return "login";
+    @PostMapping("/register_user")
+    @Transactional
+    public String registerUser(@RequestParam String email, @RequestParam String password, @RequestParam String conf_password, Model model, HttpSession session) {
+        if (!password.equals(conf_password)) {
+            model.addAttribute("errorMessage", "Las contraseñas no coinciden.");
+            return "register";
         }
+        
+        if (session.getAttribute("user") != null) {
+            return "user";
+        }
+
+        boolean emailExists = userRepository.existsByEmail(email);
+
+        if (emailExists) {
+            model.addAttribute("errorMessage", "El correo electrónico ya existe.");
+            return "register";
+             
+        } else {
+            User user = new User();
+            user.setEmail(email);
+            user.setPassword(password);
+        
+            user = userRepository.save(user); // Ensure user is fully persisted and get the updated user object
+            
+            Exercise exercise = new Exercise();
+            exercise.setUser(user);
+
+            exerciseRepository.save(exercise);
+            
+            session.setAttribute("user", user);
+            model.addAttribute("userEmail", user.getEmail());
+        
+            return "user";
+        }
+    }
+
+    @PostMapping({"/login_user"})
+    public String login(@RequestParam String email, @RequestParam String password, Model model, HttpSession session) {
+        User user = userRepository.findByEmail(email);
+
+        if (user == null || !user.getPassword().equals(password)) {
+            model.addAttribute("errorMessage2", "Correo electrónico o contraseña incorrectos.");
+            return "register";
+        }
+
+        session.setAttribute("user", user);
+        model.addAttribute("userEmail", user.getEmail());
+
+        return "user";
+    }
+
+    @GetMapping({ "/user", "/user/", "/register_user" })
+    public String user(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        
+        if (user != null) {
+            model.addAttribute("userEmail", user.getEmail());
+            return "user";
+        }
+
+        return "register";
+    }
+
+    @PostMapping("/change_email")
+    @Transactional
+    public String changeEmail(@RequestParam String email, @RequestParam String conf_email, HttpSession session, Model model) {
+        User user = (User) session.getAttribute("user");
+    
+        if (!email.equals(conf_email)) {
+            model.addAttribute("userEmail", user.getEmail());
+            model.addAttribute("errorMessage1", "Los correos electrónicos no coinciden.");
+            return "user";
+        }
+    
+        if (userRepository.existsByEmail(email)) {
+            model.addAttribute("userEmail", user.getEmail());
+            model.addAttribute("errorMessage1", "El correo electrónico ya existe.");
+            return "user";
+        }
+        
+        try {
+            user.setEmail(email);
+            userRepository.save(user);
+        
+            session.setAttribute("user", user); 
+            model.addAttribute("userEmail", user.getEmail());
+            model.addAttribute("infoMessage1", "Correo electrónico actualizado correctamente.");
+        } catch (Exception e) {
+            model.addAttribute("errorMessage1", "Error al actualizar el correo electrónico. Por favor, inténtelo de nuevo.");
+            return "user";
+        }
+    
+        return "user";
+    }
+
+    @PostMapping("/change_password")
+    @Transactional
+    public String changePassword(@RequestParam String current_password, @RequestParam String new_password, @RequestParam String conf_password, HttpSession session, Model model) {
+        User user = (User) session.getAttribute("user");
+
+        if (!user.getPassword().equals(current_password)) {
+            model.addAttribute("errorMessage2", "Contraseña actual incorrecta.");
+            return "user";
+        }
+
+        if (!new_password.equals(conf_password)) {
+            model.addAttribute("errorMessage2", "Las contraseñas no coinciden.");
+            return "user";
+        }
+
+        user.setPassword(conf_password);
+        userRepository.save(user);
+        model.addAttribute("infoMessage2", "Contraseña actualizada correctamente.");
 
         return "user";
     }
 
     @GetMapping({ "/difficulty", "/difficulty/" })
-    public String difficulty() {
+    public String difficulty(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+
+        if (user != null) {
+            model.addAttribute("userEmail", user.getEmail());
+        }
+
         return "difficulty";
     }
 
-    @GetMapping({ "/list", "/list/" })
-    public String list() {
-        return "list";
-    }
+    @GetMapping({ "/list", "/list/" }) 
+    public String list(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        Exercise exercise = null;
 
-    @GetMapping({ "/user", "/user/" })
-    public String user(Model model) {
         if (user != null) {
-            model.addAttribute("email", user.getEmail());
-        } else {
-            model.addAttribute("email", "Guest");
+            model.addAttribute("userEmail", user.getEmail());
+            exercise = exerciseRepository.findByUserId(user.getId());
         }
-        return "user";
+
+        if (exercise == null) {
+            exercise = new Exercise();
+        }
+        
+        model.addAttribute("color1", getColor(exercise.isExercise1()));
+        model.addAttribute("color2", getColor(exercise.isExercise2()));
+        model.addAttribute("color3", getColor(exercise.isExercise3()));
+        model.addAttribute("color4", getColor(exercise.isExercise4()));
+        model.addAttribute("color5", getColor(exercise.isExercise5()));
+        model.addAttribute("color6", getColor(exercise.isExercise6()));
+        model.addAttribute("color7", getColor(exercise.isExercise7()));
+        model.addAttribute("color8", getColor(exercise.isExercise8()));
+        model.addAttribute("color9", getColor(exercise.isExercise9()));
+        model.addAttribute("color10", getColor(exercise.isExercise10()));
+        model.addAttribute("color11", getColor(exercise.isExercise11()));
+        model.addAttribute("color12", getColor(exercise.isExercise12()));
+
+        return "list";
+        
     }
 
     @GetMapping({ "/error" })
@@ -71,5 +211,25 @@ public class mainController {
     @GetMapping("/code")
     public String code() {
         return "code";
+    }
+
+    @GetMapping("/log_out")
+    public String logOut(HttpSession session) {
+        session.removeAttribute("user");
+        return "index";
+    }
+    
+    @ExceptionHandler(Exception.class)
+    public String handleException(Exception ex, Model model) {
+        model.addAttribute("errorMessage", ex.getMessage());
+        return "error";
+    }
+
+    public String getColor(Boolean value) {
+        if (value) {
+            return "completed";
+        } else {    
+            return "not_completed";
+        }
     }
 }

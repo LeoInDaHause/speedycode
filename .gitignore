@@ -31,3 +31,13 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Dev Container ###
+.devcontainer/
+
+### Git Hub ###
+.github/
+
+### DataBase ###
+testdb.mv.db
+.target/

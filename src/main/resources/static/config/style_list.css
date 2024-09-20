@@ -141,7 +141,6 @@ h3 {
 
 .list p{
     height: 30%;
-    background-color: rgba(199, 199, 199, 0.267);
     word-wrap: break-word;
     overflow-wrap: break-word; 
     border-radius: 20px;
@@ -169,6 +168,15 @@ h3 {
 
     background-color: #ff0000c4;
     color: white;
+}
+
+.completed{
+    background-color: #13f5f570; 
+    color: rgb(255, 255, 255);
+}
+
+.not_completed{
+    background-color: #c7c7c744;
 }
 
 footer {

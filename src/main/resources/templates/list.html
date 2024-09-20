@@ -9,6 +9,7 @@
 
         <meta name="robots" content="noindex, nofollow">
         <meta name="theme-color" content="#09f">
+
     </head>
 
     <body>
@@ -17,7 +18,7 @@
             <a class="button" href="/register.html" th:href="@{/register}">Log in</a>
             <div class="container">
                 <a href="user.html" th:href="@{/user}"><img src="/config/img/user.png" th:src="@{/config/img/user.png}" alt="imagen" class="imagen"></a>
-                <p th:text="${email}"></p>
+                <p th:text="${userEmail}"></p>
             </div>
         </header>
 
@@ -28,23 +29,23 @@
                 <h3 style="background-color: #00ff40da;">Facil</h3>
                 <div class="block">
                     
-                    <a href="exercise.html" th:href="@{/exercise}">Ejercicio  1</a>
-                    <p>No Completado</p>
+                    <a href="code.html" th:href="@{/code}"  >Ejercicio  1</a>
+                    <p th:class="${color1}" th:text="${color1 == 'completed' ? 'Completado' : 'No Completado'}"></p>
                 </div>
                 
                 <div class="block">
-                    <a href="exercise.html" th:href="@{/exercise}">Ejercicio 2</a>
-                    <p style="background-color: #18b0b070; color: rgb(255, 255, 255);">Completado</p>
+                    <a href="code.html" th:href="@{/code}" >Ejercicio 2</a>
+                    <p th:class="${color2}" th:text="${color2 == 'completed' ? 'Completado' : 'No Completado'}"></p>
                 </div>
 
                 <div class="block">
-                    <a href="exercise.html" th:href="@{/exercise}">Ejercicio 3</a>
-                    <p>No Completado</p>
+                    <a href="code.html" th:href="@{/code}" >Ejercicio 3</a>
+                    <p th:class="${color3}" th:text="${color3 == 'completed' ? 'Completado' : 'No Completado'}"></p>
                 </div>
 
                 <div class="block">
-                    <a href="exercise.html" th:href="@{/exercise}">Ejercicio 4</a>
-                    <p>No Completado</p>
+                    <a href="code.html" th:href="@{/code}" >Ejercicio 4</a>
+                    <p th:class="${color4}" th:text="${color4 == 'completed' ? 'Completado' : 'No Completado'}"></p>
                 </div>
             </div>
 
@@ -52,23 +53,23 @@
 
                 <h3 style="background-color: #ffd000da;">Intermedio</h3>
                 <div class="block">
-                    <a href="exercise.html" th:href="@{/exercise}">Ejercicio 1</a>
-                    <p>No Completado</p>
+                    <a href="code.html" th:href="@{/code}" >Ejercicio 1</a>
+                    <p th:class="${color5}" th:text="${color5 == 'completed' ? 'Completado' : 'No Completado'}"></p>
                 </div>
                 
                 <div class="block">
-                    <a href="exercise.html" th:href="@{/exercise}">Ejercicio 2</a>
-                    <p>No Completado</p>
+                    <a href="code.html" th:href="@{/code}" >Ejercicio 2</a>
+                    <p th:class="${color6}" th:text="${color6 == 'completed' ? 'Completado' : 'No Completado'}"></p>
                 </div>
 
                 <div class="block">
-                    <a href="exercise.html" th:href="@{/exercise}">Ejercicio 3</a>
-                    <p>No Completado</p>
+                    <a href="code.html" th:href="@{/code}" >Ejercicio 3</a>
+                    <p th:class="${color7}" th:text="${color7 == 'completed' ? 'Completado' : 'No Completado'}"></p>
                 </div>
 
                 <div class="block">
-                    <a href="exercise.html" th:href="@{/exercise}">Ejercicio 4</a>
-                    <p>No Completado</p>
+                    <a href="code.html" th:href="@{/code}" >Ejercicio 4</a>
+                    <p th:class="${color8}" th:text="${color8 == 'completed' ? 'Completado' : 'No Completado'}"></p>
                 </div>
 
 
@@ -78,23 +79,23 @@
 
                 <h3 style="background-color: #ff0000ea;">Dificil</h3>
                 <div class="block">
-                    <a href="exercise.html" th:href="@{/exercise}">Ejercicio 1</a>
-                    <p>No Completado</p>
+                    <a href="code.html" th:href="@{/code}" >Ejercicio 1</a>
+                    <p th:class="${color9}" th:text="${color9 == 'completed' ? 'Completado' : 'No Completado'}"></p>
                 </div>
                 
                 <div class="block">
-                    <a href="exercise.html" th:href="@{/exercise}">Ejercicio 2</a>
-                    <p>No Completado</p>
+                    <a href="code.html" th:href="@{/code}" >Ejercicio 2</a>
+                    <p th:class="${color10}" th:text="${color10 == 'completed' ? 'Completado' : 'No Completado'}"></p>
                 </div>
 
                 <div class="block">
-                    <a href="exercise.html" th:href="@{/exercise}">Ejercicio 3</a>
-                    <p>No Completado</p>
+                    <a href="code.html" th:href="@{/code}" >Ejercicio 3</a>
+                    <p th:class="${color11}" th:text="${color11 == 'completed' ? 'Completado' : 'No Completado'}"></p>
                 </div>
 
                 <div class="block">
-                    <a href="exercise.html" th:href="@{/exercise}">Ejercicio 4</a>
-                    <p>No Completado</p>
+                    <a href="code.html" th:href="@{/code}" >Ejercicio 4</a>
+                    <p th:class="${color12}" th:text="${color12 == 'completed' ? 'Completado' : 'No Completado'}"></p>
                 </div>
             </div>
   

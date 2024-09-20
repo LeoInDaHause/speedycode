@@ -25,6 +25,7 @@
                         <label for="password">Contraseña</label>
                         <span></span>
                     </div>
+                    <p id="error-message" class="error-message" th:text="${errorMessage2}"></p>
                     <div class="recordar">¿Olvidó su contraseña?</div>
                     <input type="submit" value="Iniciar">
                 </form>
@@ -49,7 +50,7 @@
                         <label for="conf_password">Confirmar contraseña</label>
                         <span></span>
                     </div>
-                    <p id="error-message" class="error-message"></p>
+                    <p id="error-message" class="error-message" th:text="${errorMessage}"></p>
                     <input type="submit" value="Registrarse">
                 </form>
             </div>
@@ -58,19 +59,5 @@
     <footer>
         <h3>Speedy Code @2024</h3>
     </footer>
-    <script>
-        document.getElementById('register').addEventListener('submit', function(event) {
-            var password = document.getElementById('register_password').value;
-            var conf_password = document.getElementById('conf_password').value;
-            var errorMessage = document.getElementById('error-message');
-
-            if (password !== conf_password) {
-                event.preventDefault();
-                errorMessage.textContent = 'Las contraseñas no coinciden';
-            } else {
-                errorMessage.textContent = '';
-            }
-        });
-    </script>
 </body>
 </html>

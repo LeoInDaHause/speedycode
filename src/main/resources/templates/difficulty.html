@@ -19,7 +19,7 @@
 
             <div class="container">
                 <a href="user.html" th:href="@{/user}"><img src="/config/img/user.png" th:src="@{/config/img/user.png}" alt="imagen" class="imagen"></a>
-                <p th:text="${email}"></p>
+                <p th:text="${userEmail}"></p>
             </div>
 
         </header>
@@ -31,9 +31,9 @@
             </h2>
 
 
-            <a class="button" id="easy" href="exercise.html" th:href="@{/exercise}">Facil</a>
-            <a class="button" id="medium"  href="exercise.html" th:href="@{/exercise}">Intermedio</a>
-            <a class="button" id="hard"  href="exercise.html" th:href="@{/exercise}" >Dificil</a>
+            <a class="button" id="easy" href="code.html" th:href="@{/code}">Facil</a>
+            <a class="button" id="medium"  href="code.html" th:href="@{/code}">Intermedio</a>
+            <a class="button" id="hard"  href="code.html" th:href="@{/code}">Dificil</a>
             
             <a class="button" id="list" href="list.html" th:href="@{/list}">Listado Ejercicios</a>
         </main>

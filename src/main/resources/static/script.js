@@ -9,6 +9,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const $button = document.querySelector('#reload-button');
 
     const INITIAL_TIME = 30;
+
+    const instructions = document.getElementById('instructions');
+    if (instructions) {
+        instructions.classList.add('instructions');
+    }
+
     let exercises = [];
     let currentTime = INITIAL_TIME;
     let intervalId = null;
@@ -18,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return fetch('ejercicios.txt')
             .then(response => response.text())
             .then(text => {
-                exercises = text.split('\n\n');
+                exercises = text.replace(/\r\n/g, '\n').split(/\n\s*\n/);
             })
             .catch(error => console.error('Error al cargar ejercicios:', error));
     }
@@ -32,6 +38,11 @@ document.addEventListener('DOMContentLoaded', function() {
         $game.style.display = 'flex';
         $results.style.display = 'none';
         $input.value = '';
+
+        const instructions = document.getElementById('instructions');
+        if (instructions) {
+            instructions.style.display = 'block';
+        }
 
         const TEXT = getRandomExercise();
         const lines = TEXT.split('\n');
@@ -258,6 +269,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const cpm = correctLetter * 60 / INITIAL_TIME;
         $cpm.textContent = wpm.toFixed(2);
         $accuracy.textContent = `${accuracy.toFixed(2)}%`;
+
+        const instructions = document.getElementById('instructions');
+        if (instructions) {
+            instructions.style.display = 'none';
+        }
     }
 
     loadExercises().then(() => {
