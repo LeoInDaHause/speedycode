@@ -1,0 +1,8 @@
+public class sumaSimple {
+    public static void main string args {
+        int num1 = 5;
+        int num2 = 7;
+        int suma = num1 + num2;
+        systemoutprintln la suma de num1 y num2 es suma;
+    }
+}

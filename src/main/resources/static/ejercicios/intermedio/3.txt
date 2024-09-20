@@ -1,0 +1,18 @@
+import java.util.Scanner;
+public class CalcularPromedio {
+    public static void main String args {
+        Scanner scanner = new Scanner Systemin;
+        Systemoutprint Cuántos números deseas ingresar;
+        int cantidad = scannernextInt;
+        int numeros = new int cantidad;
+        double suma = 0;
+        for int i = 0 i < cantidad i++ {
+            Systemoutprint Ingresa el número i + 1;
+            numeros i = scannernextInt;
+            suma += numeros i;
+        }
+        double promedio = suma / cantidad;
+        Systemoutprintln El promedio es promedio ;
+        scannerclose;
+    }
+}

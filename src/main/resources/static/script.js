@@ -267,7 +267,7 @@ document.addEventListener('DOMContentLoaded', function() {
             : 0;
 
         const cpm = correctLetter * 60 / INITIAL_TIME;
-        $cpm.textContent = wpm.toFixed(2);
+        $cpm.textContent = cpm.toFixed(2);
         $accuracy.textContent = `${accuracy.toFixed(2)}%`;
 
         const instructions = document.getElementById('instructions');

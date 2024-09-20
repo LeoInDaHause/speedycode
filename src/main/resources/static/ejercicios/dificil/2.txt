@@ -1,0 +1,12 @@
+public class MayorEnArreglo {
+    public static void main(String[] args) {
+        int[] numeros = {5, 3, 9, 2, 10, 7};
+        int mayor = numeros[0];
+        for (int num : numeros) {
+            if (num > mayor) {
+                mayor = num;
+            }
+        }
+        System.out.println("El número mayor es: " + mayor);
+    }
+}

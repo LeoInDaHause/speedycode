@@ -1,0 +1,25 @@
+import javautilScanner;
+public class NumeroPrimo {
+    public static void main String args {
+        Scanner scanner = new Scanner Systemin;
+        Systemoutprint Ingresa un número;
+        int numero = scannernextInt;
+        if esPrimo numero {
+            Systemoutprintln El número numero es primo;
+        } else {
+            Systemoutprintln El número numero no es primo;
+        }
+        scannerclose;
+    }
+    public static boolean esPrimo int num {
+        if num < 2 {
+            return false;
+        }
+        for int i = 2 i <= Mathsqrt num i++ {
+            if num % i == 0 {
+                return false;
+            }
+        }
+        return true;
+    }
+}

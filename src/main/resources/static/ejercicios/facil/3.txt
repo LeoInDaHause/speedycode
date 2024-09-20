@@ -1,0 +1,11 @@
+import javautilScanner
+public class Palindromo
+    public static void main String args
+        Scanner scanner = new Scanner Systemin
+        Systemoutprintln Ingresa una palabra
+        String palabra = scannernextLine
+        String palabraInvertida = new StringBuilder palabrareversetoString
+        if palabraequals palabraInvertida
+            Systemoutprintln La palabra es un palindromo
+        else
+            Systemoutprintln La palabra no es un palindromo

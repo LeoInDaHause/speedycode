@@ -1,0 +1,8 @@
+private static Pasajero buscarPasajero(String nombre) {
+    for (Pasajero pasajero : pasajeros) {
+        if (pasajero.getNombre().equalsIgnoreCase(nombre)) {
+            return pasajero;
+        }
+    }
+    return null;
+}

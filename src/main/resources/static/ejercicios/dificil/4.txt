@@ -1,0 +1,39 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+public class ListaDeNombres {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        ArrayList<String> nombres = new ArrayList<>();
+        System.out.print("¿Cuántos nombres deseas agregar a la lista? ");
+        int cantidad = scanner.nextInt();
+        scanner.nextLine();
+        for (int i = 0; i < cantidad; i++) {
+            System.out.print("Ingresa el nombre " + (i + 1) + ": ");
+            String nombre = scanner.nextLine();
+            nombres.add(nombre);
+        }
+        System.out.println("\nLista de nombres ingresados:");
+        for (String nombre : nombres) {
+            System.out.println(nombre);
+        }
+        System.out.print("\nIngresa un nombre para buscar en la lista: ");
+        String nombreABuscar = scanner.nextLine();
+        if (nombres.contains(nombreABuscar)) {
+            System.out.println("El nombre '" + nombreABuscar + "' está en la lista.");
+        } else {
+            System.out.println("El nombre '" + nombreABuscar + "' no está en la lista.");
+        }
+        System.out.print("\nIngresa un nombre para eliminar de la lista: ");
+        String nombreAEliminar = scanner.nextLine();
+        if (nombres.remove(nombreAEliminar)) {
+            System.out.println("El nombre '" + nombreAEliminar + "' fue eliminado de la lista.");
+        } else {
+            System.out.println("El nombre '" + nombreAEliminar + "' no está en la lista, por lo que no se puede eliminar.");
+        }
+        System.out.println("\nLista de nombres actualizada:");
+        for (String nombre : nombres) {
+            System.out.println(nombre);
+        }
+        scanner.close();
+    }
+}

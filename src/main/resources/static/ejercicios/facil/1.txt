@@ -1,0 +1,6 @@
+public class bienvenida
+    static void main string args
+        systemoutprint hola speedy code
+        systemoutprint este es un test para escribir en el teclado, escribe!
+        for int i = 1 i <= 10 i++
+            Systemoutprintln i

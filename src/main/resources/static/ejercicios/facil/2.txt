@@ -1,0 +1,9 @@
+public class Greeting
+    private String name
+    public Greeting String name
+        thisname = name
+    public void sayHello
+        Systemoutprintln Hola name Bienvenido al mundo de Java
+    public static void main String args
+        Greeting greeting = new Greeting Pablito
+        greetingsayHello

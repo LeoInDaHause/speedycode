@@ -1,0 +1,17 @@
+import javautilScanner
+public class SumaInteractiva
+    public static int sumar int num1 int num2
+        return num1 + num2
+    public static void main String args
+        Scanner sc = new Scanner System.in
+        Systemoutprint Ingresa el primer número
+        int numero1 = scnextInt
+        Systemoutprint Ingresa el segundo número
+        int numero2 = scnextInt
+        int resultado = numero1 + numero2
+        Systemoutprintln La suma de numero1 y numero2 es resultado
+        if resultado % 2 == 0
+            Systemoutprintln El resultado es un número par
+        else
+            System.out.println El resultado es un número impar
+        scclose
