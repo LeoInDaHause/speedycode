@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const $input = document.querySelector('input');
     const $game = document.querySelector('#game');
     const $results = document.querySelector('#results');
-    const $wpm = $results.querySelector('#results-wpm');
+    const $cpm = $results.querySelector('#results-cpm');
     const $accuracy = $results.querySelector('#results-accuracy');
     const $button = document.querySelector('#reload-button');
 
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
         $input.value = '';
 
         const TEXT = getRandomExercise();
-        const lines = TEXT.split('\n');  
+        const lines = TEXT.split('\n');
         currentTime = INITIAL_TIME;
         gameStarted = false;
 
@@ -255,8 +255,8 @@ document.addEventListener('DOMContentLoaded', function() {
             ? (correctLetter / totalLetters) * 100
             : 0;
 
-        const wpm = correctWords * 60 / INITIAL_TIME;
-        $wpm.textContent = wpm;
+        const cpm = correctLetter * 60 / INITIAL_TIME;
+        $cpm.textContent = wpm.toFixed(2);
         $accuracy.textContent = `${accuracy.toFixed(2)}%`;
     }
 
