@@ -173,10 +173,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 const classToAdd = MissedL ? 'marked' : 'correct';
                 $currentWord.classList.add(classToAdd);
-                
-                if (isLastWord($nextWord)) {
-                    gameOver();
-                }
 
                 return;
             }
@@ -256,14 +252,17 @@ document.addEventListener('DOMContentLoaded', function() {
             $currentLetter.classList.add('active', 'is-last');
         }
 
-        if (isLastWord($currentWord)) {
+        if (isLastWordCompleted($currentWord)){
             gameOver();
         }
     }
 
-    function isLastWord($word) {
+    function isLastWordCompleted($currentword) {
         const $lastWord = $p.querySelector('word:last-of-type');
-        return $word == $lastWord;
+        const totalLetters = $lastWord.querySelectorAll('letter').length;
+        const writtenLetters = $lastWord.querySelectorAll('letter.correct, letter.incorrect').length;
+
+        return $currentword === $lastWord && totalLetters === writtenLetters;
     }
 
     function gameOver() {
