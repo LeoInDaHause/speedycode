@@ -103,12 +103,16 @@ document.addEventListener('DOMContentLoaded', function() {
         const { key } = event;
 
         if (key === 'Backspace') {
-            let $prevWord = getValidPrevWord($currentWord);
+            let $prevWord = $currentWord.previousElementSibling;
             let $prevLetter = $currentLetter.previousElementSibling;
         
             if (!$prevWord && !$prevLetter) {
                 event.preventDefault();
                 return;
+            }
+        
+            while ($prevWord && ($prevWord.tagName === 'BR' || $prevWord.innerText.trim() === '')) {
+                $prevWord = $prevWord.previousElementSibling;
             }
         
             if ($prevLetter) {
@@ -118,6 +122,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         
             if ($prevWord) {
+                $currentWord.setAttribute('data-input', $input.value);
+        
                 $currentWord.classList.remove('active');
                 $currentLetter.classList.remove('active');
                 $prevWord.classList.add('active');
@@ -152,9 +158,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 const $letterGo = $prevWord.querySelector('letter:last-child');
                 $currentLetter.classList.remove('active');
                 $letterGo.classList.add('active');
-                $input.value = Array.from($prevWord.querySelectorAll('letter.correct, letter.incorrect'))
-                    .map($el => $el.classList.contains('correct') ? $el.innerText : '*')
-                    .join('');
+                $input.value = Array.from($prevWord.querySelectorAll('letter.correct, letter.incorrect')).map($el => {
+                    return $el.classList.contains('correct') ? $el.innerText : '*';
+                }).join('');
                 $currentWord = $prevWord;
             }
         
@@ -162,7 +168,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 $currentWord.classList.remove('active');
                 $currentLetter.classList.remove('active');
         
-                $prevWord = getValidPrevWord($prevWord);
+                $prevWord = $prevWord.previousElementSibling;
+                while ($prevWord && ($prevWord.tagName === 'BR' || $prevWord.innerText.trim() === '')) {
+                    $prevWord = $prevWord.previousElementSibling;
+                }
         
                 if ($prevWord) {
                     $prevWord.classList.add('active');
@@ -172,17 +181,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
         
                     $input.value = $prevWord.getAttribute('data-input') || '';
-                    $currentWord = $prevWord;
+                    $currentWord = $prevWord; // Update the current word
                 }
             }
-        }
-        
-        function getValidPrevWord($currentWord) {
-            let $prevWord = $currentWord.previousElementSibling;
-            while ($prevWord && ($prevWord.tagName === 'BR' || $prevWord.innerText.trim() === '')) {
-                $prevWord = $prevWord.previousElementSibling;
-            }
-            return $prevWord;
         }
         
         $input.addEventListener('input', () => {
