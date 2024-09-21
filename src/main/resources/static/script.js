@@ -103,38 +103,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const { key } = event;
 
         if (key === 'Backspace') {
-            let $prevWord = $currentWord.previousElementSibling;
-            let $prevLetter = $currentLetter.previousElementSibling;
+            const $prevWord = $currentWord.previousElementSibling;
+            const $prevLetter = $currentLetter.previousElementSibling;
         
             if (!$prevWord && !$prevLetter) {
                 event.preventDefault();
-                return;
-            }
-    
-            while ($prevWord && ($prevWord.tagName === 'BR' || $prevWord.innerText.trim() === '')) {
-                $prevWord = $prevWord.previousElementSibling;
-            }
-        
-            if ($prevLetter) {
-                $currentLetter.classList.remove('active');
-                $prevLetter.classList.add('active');
-                return;
-            }
-        
-            if ($prevWord) {
-                $currentWord.setAttribute('data-input', $input.value);
-        
-                $currentWord.classList.remove('active');
-                $currentLetter.classList.remove('active');
-                $prevWord.classList.add('active');
-                
-                $prevLetter = $prevWord.querySelector('letter:last-child');
-                if ($prevLetter) {
-                    $prevLetter.classList.add('active');
-                }
-        
-                $input.value = $prevWord.getAttribute('data-input') || ''; 
-                $currentWord = $prevWord;
                 return;
             }
         
@@ -142,6 +115,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 event.preventDefault();
                 $p.removeChild($prevWord);
                 $currentWord.classList.remove('active');
+        
                 const $lastWord = $p.querySelector('word:last-of-type');
                 if ($lastWord) {
                     const $lastLetter = $lastWord.querySelector('letter:last-child');
@@ -156,43 +130,29 @@ document.addEventListener('DOMContentLoaded', function() {
                 event.preventDefault();
                 $prevWord.classList.remove('marked');
                 $prevWord.classList.add('active');
+        
                 const $letterGo = $prevWord.querySelector('letter:last-child');
+        
                 $currentLetter.classList.remove('active');
                 $letterGo.classList.add('active');
+        
                 $input.value = Array.from($prevWord.querySelectorAll('letter.correct, letter.incorrect')).map($el => {
                     return $el.classList.contains('correct') ? $el.innerText : '*';
                 }).join('');
-                $currentWord = $prevWord;
             }
         
-            if (!$prevLetter && $prevWord && $prevWord.tagName === 'BR') {
-                $currentWord.classList.remove('active');
-                $currentLetter.classList.remove('active');
-        
-                $prevWord = $prevWord.previousElementSibling;
-                while ($prevWord && ($prevWord.tagName === 'BR' || $prevWord.innerText.trim() === '')) {
-                    $prevWord = $prevWord.previousElementSibling;
-                }
-        
-                if ($prevWord) {
-                    $prevWord.classList.add('active');
-                    $prevLetter = $prevWord.querySelector('letter:last-child');
-                    if ($prevLetter) {
-                        $prevLetter.classList.add('active');
-                    }
-        
-                    $input.value = $prevWord.getAttribute('data-input') || '';
-                    $currentWord = $prevWord;
+            // New functionality: Move to the previous line if at the first word of a new line
+            if ($currentWord && $currentWord.previousElementSibling && $currentWord.previousElementSibling.tagName === 'BR') {
+                event.preventDefault();
+                const $prevLineLastWord = $currentWord.previousElementSibling.previousElementSibling;
+                if ($prevLineLastWord) {
+                    const $lastLetter = $prevLineLastWord.querySelector('letter:last-child');
+                    $currentWord.classList.remove('active');
+                    $prevLineLastWord.classList.add('active');
+                    $lastLetter.classList.add('active');
                 }
             }
         }
-        $input.addEventListener('input', () => {
-            if ($currentWord) {
-                $currentWord.setAttribute('data-input', $input.value);
-            }
-        });
-        
-        
         
         if (event.key === '0' || event.code === 'Digit0') {
             event.preventDefault();
