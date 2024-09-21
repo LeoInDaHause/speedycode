@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 event.preventDefault();
                 return;
             }
-        
+    
             while ($prevWord && ($prevWord.tagName === 'BR' || $prevWord.innerText.trim() === '')) {
                 $prevWord = $prevWord.previousElementSibling;
             }
@@ -127,12 +127,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 $currentWord.classList.remove('active');
                 $currentLetter.classList.remove('active');
                 $prevWord.classList.add('active');
+                
                 $prevLetter = $prevWord.querySelector('letter:last-child');
                 if ($prevLetter) {
                     $prevLetter.classList.add('active');
                 }
         
-                $input.value = $prevWord.getAttribute('data-input') || '';
+                $input.value = $prevWord.getAttribute('data-input') || ''; 
                 $currentWord = $prevWord;
                 return;
             }
@@ -185,12 +186,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         }
-        
         $input.addEventListener('input', () => {
             if ($currentWord) {
                 $currentWord.setAttribute('data-input', $input.value);
             }
         });
+        
         
         
         if (event.key === '0' || event.code === 'Digit0') {
