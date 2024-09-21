@@ -140,16 +140,18 @@ document.addEventListener('DOMContentLoaded', function() {
                     return $el.classList.contains('correct') ? $el.innerText : '*';
                 }).join('');
             }
-        
-            // New functionality: Move to the previous line if at the first word of a new line
+
             if ($currentWord && $currentWord.previousElementSibling && $currentWord.previousElementSibling.tagName === 'BR') {
                 event.preventDefault();
                 const $prevLineLastWord = $currentWord.previousElementSibling.previousElementSibling;
                 if ($prevLineLastWord) {
                     const $lastLetter = $prevLineLastWord.querySelector('letter:last-child');
                     $currentWord.classList.remove('active');
+                    $currentLetter.classList.remove('active');
                     $prevLineLastWord.classList.add('active');
                     $lastLetter.classList.add('active');
+                    $currentWord = $prevLineLastWord;
+                    $currentLetter = $lastLetter;
                 }
             }
         }
