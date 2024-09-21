@@ -160,7 +160,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 }).join('');
             }
         
-            if (!$prevLetter && $prevWord && $prevWord.tagName === 'BR') {
+            // New logic to handle backspace at the beginning of a new line
+            if (!$prevLetter && $prevWord && $prevWord.tagName === 'BR' && $currentWord.previousElementSibling.tagName === 'BR') {
                 event.preventDefault();
                 $p.removeChild($prevWord);
                 $currentWord.classList.remove('active');
