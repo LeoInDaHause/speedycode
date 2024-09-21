@@ -164,28 +164,41 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (event.key === '0' || event.code === 'Digit0') {
             event.preventDefault();
-            let $prevWord1 = $currentWord.previousElementSibling;
+            let $prevWord = $currentWord.previousElementSibling;
 
-            while ($prevWord1 && ($prevWord1.tagName === 'BR' || $prevWord1.innerText.trim() === '')) {
-                $prevWord1 = $prevWord1.previousElementSibling;
+            while ($prevWord && ($prevWord.tagName === 'BR' || $prevWord.innerText.trim() === '')) {
+                $prevWord = $prevWord.previousElementSibling;
             }
 
-            if ($prevWord1) {
+            if ($prevWord) {
                 $currentWord.classList.remove('active');
                 $currentLetter.classList.remove('active');
 
 
-                $prevWord1.classList.add('active');
-                const $prevLetter = $prevWord1.querySelector('letter');
+                $prevWord.classList.add('active');
+                const $prevLetter = $prevWord.querySelector('letter');
                 if ($prevLetter) {
                     $prevLetter.classList.add('active');
                 }
 
-                $input.value = Array.from($prevWord1.querySelectorAll('letter.correct, letter.incorrect')).map($el => {
+                $input.value = Array.from($prevWord.querySelectorAll('letter.correct, letter.incorrect')).map($el => {
                     return $el.classList.contains('correct') ? $el.innerText : '';
                 }).join('');
             }
-            return;
+
+            if ($currentLetter.innerText === '' && $prevWord && $prevWord.tagName === 'BR') {
+                event.preventDefault();
+                $p.removeChild($prevWord);
+                $currentWord.classList.remove('active');
+
+                const $lastWord = $p.querySelector('word:last-of-type');
+                if ($lastWord) {
+                    const $lastLetter = $lastWord.querySelector('letter:last-child');
+                    $lastWord.classList.add('active');
+                    $lastLetter.classList.add('active');
+                }
+                return;
+            }
         }
 
 
