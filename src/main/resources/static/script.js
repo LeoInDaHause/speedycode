@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const classToAdd = MissedL ? 'marked' : 'correct';
                 $currentWord.classList.add(classToAdd);
                 
-                if (isLastCharacter($nextWord, $nextLetter)) {
+                if (isLastCharacter()) {
                     gameOver();
                 }
 
@@ -256,16 +256,18 @@ document.addEventListener('DOMContentLoaded', function() {
             $currentLetter.classList.add('active', 'is-last');
         }
 
-        if (isLastCharacter($nextWord, $nextLetter)) {
+        if (isLastCharacter()) {
             gameOver();
         }
     }
 
-    function isLastCharacter($currectWord, $nextLetter) {
+    function isLastCharacter() {
         const $lastWord = $p.querySelector('word:last-of-type');
         const $lastLetter = $lastWord.querySelector('letter:last-of-type');
+        const $activeWord = $p.querySelector('word.active');
+        const $activeLetter = $activeWord.querySelector('letter.active');
 
-        return $currectWord === $lastWord && $nextLetter === $lastLetter;
+        return $activeWord === $lastWord && $activeLetter == $lastLetter;
     }
 
     function gameOver() {
