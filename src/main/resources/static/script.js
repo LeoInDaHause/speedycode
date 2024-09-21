@@ -160,7 +160,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }).join('');
             }
         
-            // New logic to handle backspace at the beginning of a new line
             if (!$prevLetter && $prevWord && $prevWord.tagName === 'BR' && $currentWord.previousElementSibling.tagName === 'BR') {
                 event.preventDefault();
                 $p.removeChild($prevWord);
@@ -171,6 +170,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     const $lastLetter = $lastWord.querySelector('letter:last-child');
                     $lastWord.classList.add('active');
                     $lastLetter.classList.add('active');
+        
+                    $input.value = Array.from($currentWord.querySelectorAll('letter.correct, letter.incorrect')).map($el => {
+                        return $el.classList.contains('correct') ? $el.innerText : '';
+                    }).join('');
                 }
             }
         }
