@@ -267,7 +267,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const $activeWord = $p.querySelector('word.active');
         const $activeLetter = $activeWord.querySelector('letter.active');
 
-        return $activeWord === $lastWord && $activeLetter == $lastLetter && $nextLetter.classList.contains('is-last');
+        return $activeWord === $lastWord && $activeLetter == $lastLetter;
     }
 
     function gameOver() {
