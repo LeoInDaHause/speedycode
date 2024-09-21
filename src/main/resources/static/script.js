@@ -115,6 +115,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 $prevWord = $prevWord.previousElementSibling;
             }
 
+            if ($prevWord) {
+                $currentWord.classList.remove('active');
+                $currentLetter.classList.remove('active');
+
+
+                $prevWord.classList.add('active');
+                const $prevLetter = $prevWord.querySelector('letter');
+                if ($prevLetter) {
+                    $prevLetter.classList.add('active');
+                }
+
+                $input.value = Array.from($prevWord.querySelectorAll('letter.correct, letter.incorrect')).map($el => {
+                    return $el.classList.contains('correct') ? $el.innerText : '';
+                }).join('');
+            }
+
             if ($currentLetter.innerText === '' && $prevWord && $prevWord.tagName === 'BR') {
                 event.preventDefault();
                 $p.removeChild($prevWord);
