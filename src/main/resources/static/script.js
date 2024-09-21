@@ -124,17 +124,38 @@ document.addEventListener('DOMContentLoaded', function() {
             if ($prevWord) {
                 $currentWord.classList.remove('active');
                 $currentLetter.classList.remove('active');
-        
                 $prevWord.classList.add('active');
-                $prevLetter = $prevWord.querySelector('letter:last-child');
+                const $prevLetter = $prevWord.querySelector('letter');
                 if ($prevLetter) {
                     $prevLetter.classList.add('active');
                 }
-        
                 $input.value = Array.from($prevWord.querySelectorAll('letter.correct, letter.incorrect')).map($el => {
                     return $el.classList.contains('correct') ? $el.innerText : '';
                 }).join('');
+            }
+            if ($currentLetter.innerText === '' && $prevWord && $prevWord.tagName === 'BR') {
+                event.preventDefault();
+                $p.removeChild($prevWord);
+                $currentWord.classList.remove('active');
+                const $lastWord = $p.querySelector('word:last-of-type');
+                if ($lastWord) {
+                    const $lastLetter = $lastWord.querySelector('letter:last-child');
+                    $lastWord.classList.add('active');
+                    $lastLetter.classList.add('active');
+                }
                 return;
+            }
+            const $wordMarked = $p.querySelector('word.marked');
+            if ($wordMarked && !$prevLetter) {
+                event.preventDefault();
+                $prevWord.classList.remove('marked');
+                $prevWord.classList.add('active');
+                const $letterGo = $prevWord.querySelector('letter:last-child');
+                $currentLetter.classList.remove('active');
+                $letterGo.classList.add('active');
+                $input.value = Array.from($prevWord.querySelectorAll('letter.correct, letter.incorrect')).map($el => {
+                    return $el.classList.contains('correct') ? $el.innerText : '*';
+                }).join('');
             }
         
             if (!$prevLetter && $prevWord && $prevWord.tagName === 'BR') {
