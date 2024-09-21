@@ -121,9 +121,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     $prevLetter.classList.add('active');
                 }
 
+                const $prevWordMarked = $p.querySelector('word.marked');
+                if ($prevWordMarked) {
+                    $prevWordMarked.classList.remove('marked');
+                }
+
                 $input.value = Array.from($prevWord.querySelectorAll('letter.correct, letter.incorrect')).map($el => {
                     return $el.classList.contains('correct') ? $el.innerText : '*';
                 }).join('');
+                return;
             }
             return;
         }
@@ -151,7 +157,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         $nextLetter.classList.add('active');
                     }
 
-                    $input.value = ''; 
+                    $input.value = '';
                 }
                 return;
             }
