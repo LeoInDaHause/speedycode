@@ -111,6 +111,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
+            while ($prevWord && ($prevWord.tagName === 'BR' || $prevWord.innerText.trim() === '')) {
+                $prevWord = $prevWord.previousElementSibling;
+            }
+
             if ($currentLetter.innerText === '' && $prevWord && $prevWord.tagName === 'BR') {
                 event.preventDefault();
                 $p.removeChild($prevWord);
