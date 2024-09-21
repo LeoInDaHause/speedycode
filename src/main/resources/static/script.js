@@ -164,24 +164,24 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (event.key === '0' || event.code === 'Digit0') {
             event.preventDefault();
-            let $prevWord = $currentWord.previousElementSibling;
+            let $prevWord1 = $currentWord.previousElementSibling;
 
-            while ($prevWord && ($prevWord.tagName === 'BR' || $prevWord.innerText.trim() === '')) {
-                $prevWord = $prevWord.previousElementSibling;
+            while ($prevWord1 && ($prevWord1.tagName === 'BR' || $prevWord1.innerText.trim() === '')) {
+                $prevWord1 = $prevWord1.previousElementSibling;
             }
 
-            if ($prevWord) {
+            if ($prevWord1) {
                 $currentWord.classList.remove('active');
                 $currentLetter.classList.remove('active');
 
 
-                $prevWord.classList.add('active');
-                const $prevLetter = $prevWord.querySelector('letter');
+                $prevWord1.classList.add('active');
+                const $prevLetter = $prevWord1.querySelector('letter');
                 if ($prevLetter) {
                     $prevLetter.classList.add('active');
                 }
 
-                $input.value = Array.from($prevWord.querySelectorAll('letter.correct, letter.incorrect')).map($el => {
+                $input.value = Array.from($prevWord1.querySelectorAll('letter.correct, letter.incorrect')).map($el => {
                     return $el.classList.contains('correct') ? $el.innerText : '';
                 }).join('');
             }
