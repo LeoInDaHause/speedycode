@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if ($prevLetter) {
                     $prevLetter.classList.add('active');
                 }
-    
+        
                 $input.value = $prevWord.getAttribute('data-input') || '';
                 return;
             }
@@ -180,7 +180,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         }
-        
+
         $input.addEventListener('input', () => {
             if ($currentWord) {
                 $currentWord.setAttribute('data-input', $input.value);
