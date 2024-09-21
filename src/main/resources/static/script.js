@@ -161,8 +161,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     $prevLetter.classList.add('active');
                 }
 
-                const typedText = Array.from($prevWord.querySelectorAll('letter')).map($el => $el.innerText).join('');
-                $input.value = typedText;
+                $input.value = Array.from($prevWord.querySelectorAll('letter.correct, letter.incorrect')).map($el => {
+                    return $el.classList.contains('correct') ? $el.innerText : '';
+                }).join('');
             }
             return;
         }
