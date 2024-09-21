@@ -120,8 +120,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 if ($prevLetter) {
                     $prevLetter.classList.add('active');
                 }
-                
-                $input.value = '';
+
+                $input.value = Array.from($prevWord.querySelectorAll('letter.correct, letter.incorrect')).map($el => {
+                    return $el.classList.contains('correct') ? $el.innerText : '*';
+                }).join('');
             }
             return;
         }
@@ -280,7 +282,7 @@ document.addEventListener('DOMContentLoaded', function() {
             ? (correctLetter / totalLetters) * 100
             : 0;
 
-        const cpm = correctLetter * 60 / INITIAL_TIME;
+        const cpm = correctLetter * 60 / (INITIAL_TIME - currentTime);
         $cpm.textContent = cpm;
         $accuracy.textContent = `${accuracy.toFixed(2)}%`;
 
