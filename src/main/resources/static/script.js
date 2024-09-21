@@ -125,14 +125,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 $currentWord.classList.remove('active');
                 $currentLetter.classList.remove('active');
                 $prevWord.classList.add('active');
-                const $prevLetter = $prevWord.querySelector('letter');
+                $prevLetter = $prevWord.querySelector('letter:last-child');
                 if ($prevLetter) {
                     $prevLetter.classList.add('active');
                 }
-                $input.value = Array.from($prevWord.querySelectorAll('letter.correct, letter.incorrect')).map($el => {
-                    return $el.classList.contains('correct') ? $el.innerText : '';
-                }).join('');
+        
+                $input.value = $prevWord.getAttribute('data-input') || '';
+                return;
             }
+        
             if ($currentLetter.innerText === '' && $prevWord && $prevWord.tagName === 'BR') {
                 event.preventDefault();
                 $p.removeChild($prevWord);
@@ -145,6 +146,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 return;
             }
+        
             const $wordMarked = $p.querySelector('word.marked');
             if ($wordMarked && !$prevLetter) {
                 event.preventDefault();
@@ -174,12 +176,15 @@ document.addEventListener('DOMContentLoaded', function() {
                         $prevLetter.classList.add('active');
                     }
         
-                    $input.value = Array.from($prevWord.querySelectorAll('letter.correct, letter.incorrect')).map($el => {
-                        return $el.classList.contains('correct') ? $el.innerText : '';
-                    }).join('');
+                    $input.value = $prevWord.getAttribute('data-input') || '';
                 }
             }
         }
+        $input.addEventListener('input', () => {
+            if ($currentWord) {
+                $currentWord.setAttribute('data-input', $input.value);
+            }
+        });
         
         if (event.key === '0' || event.code === 'Digit0') {
             event.preventDefault();
