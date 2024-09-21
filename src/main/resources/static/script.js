@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
         
                 $input.value = $prevWord.getAttribute('data-input') || '';
-                $currentWord = $prevWord; // Update the current word
+                $currentWord = $prevWord;
                 return;
             }
         
@@ -181,7 +181,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
         
                     $input.value = $prevWord.getAttribute('data-input') || '';
-                    $currentWord = $prevWord; // Update the current word
+                    $currentWord = $prevWord;
                 }
             }
         }
