@@ -131,6 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
         
                 $input.value = $prevWord.getAttribute('data-input') || '';
+                $currentWord = $prevWord; // Update the current word
                 return;
             }
         
@@ -158,6 +159,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 $input.value = Array.from($prevWord.querySelectorAll('letter.correct, letter.incorrect')).map($el => {
                     return $el.classList.contains('correct') ? $el.innerText : '*';
                 }).join('');
+                $currentWord = $prevWord;
             }
         
             if (!$prevLetter && $prevWord && $prevWord.tagName === 'BR') {
@@ -177,9 +179,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
         
                     $input.value = $prevWord.getAttribute('data-input') || '';
+                    $currentWord = $prevWord;
                 }
             }
         }
+        
+        $input.addEventListener('input', () => {
+            if ($currentWord) {
+                $currentWord.setAttribute('data-input', $input.value);
+            }
+        });
 
         $input.addEventListener('input', () => {
             if ($currentWord) {
