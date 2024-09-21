@@ -115,6 +115,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 $prevWord = $prevWord.previousElementSibling;
             }
         
+            if ($prevLetter) {
+                $currentLetter.classList.remove('active');
+                $prevLetter.classList.add('active');
+                return;
+            }
+        
             if ($prevWord) {
                 $currentWord.classList.remove('active');
                 $currentLetter.classList.remove('active');
@@ -128,36 +134,29 @@ document.addEventListener('DOMContentLoaded', function() {
                 $input.value = Array.from($prevWord.querySelectorAll('letter.correct, letter.incorrect')).map($el => {
                     return $el.classList.contains('correct') ? $el.innerText : '';
                 }).join('');
-            }
-        
-            if ($currentLetter.innerText === '' && $prevWord && $prevWord.tagName === 'BR') {
-                event.preventDefault();
-                $p.removeChild($prevWord);
-                $currentWord.classList.remove('active');
-        
-                const $lastWord = $p.querySelector('word:last-of-type');
-                if ($lastWord) {
-                    const $lastLetter = $lastWord.querySelector('letter:last-child');
-                    $lastWord.classList.add('active');
-                    $lastLetter.classList.add('active');
-                }
                 return;
             }
         
-            // Handle case where $prevLetter does not exist and $prevWord is a line above
-            if (!$prevLetter && $prevWord) {
+            if (!$prevLetter && $prevWord && $prevWord.tagName === 'BR') {
                 $currentWord.classList.remove('active');
                 $currentLetter.classList.remove('active');
         
-                $prevWord.classList.add('active');
-                $prevLetter = $prevWord.querySelector('letter:last-child');
-                if ($prevLetter) {
-                    $prevLetter.classList.add('active');
+                $prevWord = $prevWord.previousElementSibling;
+                while ($prevWord && ($prevWord.tagName === 'BR' || $prevWord.innerText.trim() === '')) {
+                    $prevWord = $prevWord.previousElementSibling;
                 }
         
-                $input.value = Array.from($prevWord.querySelectorAll('letter.correct, letter.incorrect')).map($el => {
-                    return $el.classList.contains('correct') ? $el.innerText : '';
-                }).join('');
+                if ($prevWord) {
+                    $prevWord.classList.add('active');
+                    $prevLetter = $prevWord.querySelector('letter:last-child');
+                    if ($prevLetter) {
+                        $prevLetter.classList.add('active');
+                    }
+        
+                    $input.value = Array.from($prevWord.querySelectorAll('letter.correct, letter.incorrect')).map($el => {
+                        return $el.classList.contains('correct') ? $el.innerText : '';
+                    }).join('');
+                }
             }
         }
         
