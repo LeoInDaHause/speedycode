@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
             if ($currentWord && $currentWord.previousElementSibling && $currentWord.previousElementSibling.tagName === 'BR') {
                 const $prevLineLastWord = $currentWord.previousElementSibling.previousElementSibling;
-                if ($prevLineLastWord && $currentLetter === $currentWord.querySelector('letter:first-child')) {
+                if ($prevLineLastWord) {
                     event.preventDefault();
                     const $lastLetter = $prevLineLastWord.querySelector('letter:last-child');
                     $currentWord.classList.remove('active');
