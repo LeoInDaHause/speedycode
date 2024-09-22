@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
             $input.focus();
         });
         $input.addEventListener('keydown', onKeyDown);
-        $input.addEventListener('keyup', debounce(onKeyUp, 50));
+        $input.addEventListener('input', onInput);
         $button.addEventListener('click', initGame);
     }
 
@@ -225,7 +225,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function onKeyUp(event) {
+    function onInput(event) {
         const $currentWord = $p.querySelector('word.active');
         if (!$currentWord) return;
 
@@ -237,30 +237,32 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const $allLetters = $currentWord.querySelectorAll('letter');
 
-        $allLetters.forEach($letter => $letter.classList.remove('correct', 'incorrect'));
+        requestAnimationFrame(() => {
+            $allLetters.forEach($letter => $letter.classList.remove('correct', 'incorrect'));
 
-        $input.value.split('').forEach((char, index) => {
-            const $letter = $allLetters[index];
-            const Check = currentWord[index];
+            $input.value.split('').forEach((char, index) => {
+                const $letter = $allLetters[index];
+                const Check = currentWord[index];
 
-            const isCorrect = char === Check;
-            const letterClass = isCorrect ? 'correct' : 'incorrect';
-            if ($letter) $letter.classList.add(letterClass);
+                const isCorrect = char === Check;
+                const letterClass = isCorrect ? 'correct' : 'incorrect';
+                if ($letter) $letter.classList.add(letterClass);
+            });
+
+            $currentLetter.classList.remove('active', 'is-last');
+            const inputLength = $input.value.length;
+            const $nextLetter = $allLetters[inputLength];
+
+            if ($nextLetter) {
+                $nextLetter.classList.add('active');
+            } else {
+                $currentLetter.classList.add('active', 'is-last');
+            }
+
+            if (isLastWordCompleted($currentWord)){
+                gameOver();
+            }
         });
-
-        $currentLetter.classList.remove('active', 'is-last');
-        const inputLength = $input.value.length;
-        const $nextLetter = $allLetters[inputLength];
-
-        if ($nextLetter) {
-            $nextLetter.classList.add('active');
-        } else {
-            $currentLetter.classList.add('active', 'is-last');
-        }
-
-        if (isLastWordCompleted($currentWord)){
-            gameOver();
-        }
     }
 
     function isLastWordCompleted($currentword) {
@@ -294,14 +296,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (instructions) {
             instructions.style.display = 'none';
         }
-    }
-
-    function debounce(func, wait) {
-        let timeout;
-        return function(...args) {
-            clearTimeout(timeout);
-            timeout = setTimeout(() => func.apply(this, args), wait);
-        };
     }
 
     loadExercises().then(() => {
