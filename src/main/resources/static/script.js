@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let exercises = [];
     let currentTime = INITIAL_TIME;
     let intervalId = null;
-    let gameStarted = false; 
+    let gameStarted = false;
 
     function loadExercises() {
         return fetch('ejercicios.txt')
@@ -213,6 +213,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
         }
+        setTimeout(() => $input.focus(), 0);
     }
 
     function onKeyUp(event) {
@@ -251,6 +252,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (isLastWordCompleted($currentWord)){
             gameOver();
         }
+        setTimeout(() => $input.focus(), 0);
     }
 
     function isLastWordCompleted($currentword) {
