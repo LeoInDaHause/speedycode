@@ -110,6 +110,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 event.preventDefault();
                 return;
             }
+
+            if ($currentLetter.innerText === '' && $prevLetter) {
+                event.preventDefault();
+                $currentWord.removeChild($currentLetter);
+                $currentLetter.classList.remove('active');
+        
+                const $lastLetter = $currentWord.querySelector('letter:last-child');
+                if ($lastLetter) {
+                    $lastLetter.classList.add('active');
+                }
+                return;
+            }
         
             if ($currentLetter.innerText === '' && $prevWord && $prevWord.tagName === 'BR') {
                 event.preventDefault();
@@ -158,9 +170,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (event.key === '0' || event.code === 'Digit0') {
             const $prevElement = $currentWord.previousElementSibling;
-            const $firstLetter = $currentWord.querySelector('letter:first-child');
-        
-            if ($prevElement && $prevElement.tagName === 'BR' && $currentLetter === $firstLetter) {
+            if ($prevElement && $prevElement.tagName === 'BR') {
                 event.preventDefault();
         
                 let $prevWord = $currentWord.previousElementSibling;
@@ -170,9 +180,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
         
                 if ($prevWord) {
-                    // Guardar la palabra mal escrita
-                    const incorrectWord = $input.value;
-        
                     $currentWord.classList.remove('active');
                     $currentLetter.classList.remove('active');
         
@@ -182,7 +189,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         $prevLetter.classList.add('active');
                     }
         
-                    $input.value = incorrectWord;
+                    $input.value = Array.from($prevWord.querySelectorAll('letter.correct, letter.incorrect')).map($el => {
+                        return $el.classList.contains('correct') ? $el.innerText : '';
+                    }).join('');
                 }
             }
             return;
