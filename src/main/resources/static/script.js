@@ -159,63 +159,36 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         }
-        
-        if (event.key === '0' || event.code === 'Digit0') {
-            const $prevElement = $currentWord.previousElementSibling;
-            if ($prevElement && $prevElement.tagName === 'BR') {
-                event.preventDefault();
-        
-                let $prevWord = $currentWord.previousElementSibling;
-        
-                while ($prevWord && ($prevWord.tagName === 'BR' || $prevWord.innerText.trim() === '')) {
-                    $prevWord = $prevWord.previousElementSibling;
-                }
-        
-                if ($prevWord) {
-                    $currentWord.classList.remove('active');
-                    $currentLetter.classList.remove('active');
-        
-                    $prevWord.classList.add('active');
-                    const $prevLetter = $prevWord.querySelector('letter');
-                    if ($prevLetter) {
-                        $prevLetter.classList.add('active');
-                    }
-        
-                    $input.value = Array.from($prevWord.querySelectorAll('letter.correct, letter.incorrect')).map($el => {
-                        return $el.classList.contains('correct') ? $el.innerText : '';
-                    }).join('');
-                }
-            }
-            return;
-        }
-
 
         if (key === 'Enter') {
             event.preventDefault();
-
-            const currentChar = $currentLetter.innerText;
-            if (currentChar === ';' || currentChar === '{' || currentChar === '}') {
-                let $nextWord = $currentWord.nextElementSibling;
-
+        
+            let $nextWord = $currentWord.nextElementSibling;
+            while ($nextWord && $nextWord.tagName !== 'BR') {
+                $nextWord = $nextWord.nextElementSibling;
+            }
+        
+            if ($nextWord) {
+                $nextWord = $nextWord.nextElementSibling;
                 while ($nextWord && ($nextWord.innerText.trim() === '' || $nextWord.tagName === 'BR')) {
                     $nextWord = $nextWord.nextElementSibling;
                 }
-
+        
                 if ($nextWord) {
                     const $nextLetter = $nextWord.querySelector('letter');
-
+        
                     $currentWord.classList.remove('active', 'marked');
                     $currentLetter.classList.remove('active');
-
+        
                     $nextWord.classList.add('active');
                     if ($nextLetter) {
                         $nextLetter.classList.add('active');
                     }
-
+        
                     $input.value = '';
                 }
-                return;
             }
+            return;
         }
 
         if (key === ' ') {
