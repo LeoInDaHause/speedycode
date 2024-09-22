@@ -168,6 +168,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
         
                 if ($prevWord) {
+                    const incorrectWord = $input.value;
+        
                     $currentWord.classList.remove('active');
                     $currentLetter.classList.remove('active');
         
@@ -176,10 +178,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     if ($prevLetter) {
                         $prevLetter.classList.add('active');
                     }
-        
-                    $input.value = Array.from($prevWord.querySelectorAll('letter.correct, letter.incorrect')).map($el => {
-                        return $el.classList.contains('correct') ? $el.innerText : '';
-                    }).join('');
+                    $input.value = incorrectWord;
                 }
             }
             return;
