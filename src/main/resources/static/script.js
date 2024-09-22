@@ -157,29 +157,30 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         if (event.key === '0' || event.code === 'Digit0') {
-            event.preventDefault();
-
-
-            let $prevWord = $currentWord.previousElementSibling;
-
-            while ($prevWord && ($prevWord.tagName === 'BR' || $prevWord.innerText.trim() === '')) {
-                $prevWord = $prevWord.previousElementSibling;
-            }
-
-
-            if ($prevWord) {
-                $currentWord.classList.remove('active');
-                $currentLetter.classList.remove('active');
-
-                $prevWord.classList.add('active');
-                const $prevLetter = $prevWord.querySelector('letter');
-                if ($prevLetter) {
-                    $prevLetter.classList.add('active');
+            const $prevElement = $currentWord.previousElementSibling;
+            if ($prevElement && $prevElement.tagName === 'BR') {
+                event.preventDefault();
+        
+                let $prevWord = $currentWord.previousElementSibling;
+        
+                while ($prevWord && ($prevWord.tagName === 'BR' || $prevWord.innerText.trim() === '')) {
+                    $prevWord = $prevWord.previousElementSibling;
                 }
-
-                $input.value = Array.from($prevWord.querySelectorAll('letter.correct, letter.incorrect')).map($el => {
-                    return $el.classList.contains('correct') ? $el.innerText : '';
-                }).join('');
+        
+                if ($prevWord) {
+                    $currentWord.classList.remove('active');
+                    $currentLetter.classList.remove('active');
+        
+                    $prevWord.classList.add('active');
+                    const $prevLetter = $prevWord.querySelector('letter');
+                    if ($prevLetter) {
+                        $prevLetter.classList.add('active');
+                    }
+        
+                    $input.value = Array.from($prevWord.querySelectorAll('letter.correct, letter.incorrect')).map($el => {
+                        return $el.classList.contains('correct') ? $el.innerText : '';
+                    }).join('');
+                }
             }
             return;
         }
