@@ -101,15 +101,71 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!$currentLetter) return;
 
         const { key } = event;
+
+        if (key === 'Backspace') {
+            const $prevWord = $currentWord.previousElementSibling;
+            const $prevLetter = $currentLetter.previousElementSibling;
+        
+            if (!$prevWord && !$prevLetter) {
+                event.preventDefault();
+                return;
+            }
+        
+            if ($currentLetter.innerText === '' && $prevWord && $prevWord.tagName === 'BR') {
+                event.preventDefault();
+                $p.removeChild($prevWord);
+                $currentWord.classList.remove('active');
+        
+                const $lastWord = $p.querySelector('word:last-of-type');
+                if ($lastWord) {
+                    const $lastLetter = $lastWord.querySelector('letter:last-child');
+                    $lastWord.classList.add('active');
+                    $lastLetter.classList.add('active');
+                }
+                return;
+            }
+        
+            const $wordMarked = $p.querySelector('word.marked');
+            if ($wordMarked && !$prevLetter) {
+                event.preventDefault();
+                $prevWord.classList.remove('marked');
+                $prevWord.classList.add('active');
+        
+                const $letterGo = $prevWord.querySelector('letter:last-child');
+        
+                $currentLetter.classList.remove('active');
+                $letterGo.classList.add('active');
+        
+                $input.value = Array.from($prevWord.querySelectorAll('letter.correct, letter.incorrect')).map($el => {
+                    return $el.classList.contains('correct') ? $el.innerText : '*';
+                }).join('');
+            }
+
+            if ($currentWord && $currentWord.previousElementSibling && $currentWord.previousElementSibling.tagName === 'BR') {
+                event.preventDefault();
+                const $prevLineLastWord = $currentWord.previousElementSibling.previousElementSibling;
+                if ($prevLineLastWord) {
+                    const $lastLetter = $prevLineLastWord.querySelector('letter:last-child');
+                    $currentWord.classList.remove('active');
+                    $currentLetter.classList.remove('active');
+                    $prevLineLastWord.classList.add('active');
+                    $lastLetter.classList.add('active');
+                    $currentWord = $prevLineLastWord;
+                    $currentLetter = $lastLetter;
+                }
+            }
+        }
         
         if (event.key === '0' || event.code === 'Digit0') {
             event.preventDefault();
 
+
             let $prevWord = $currentWord.previousElementSibling;
 
-            while ($prevWord && !$prevWord.innerText.trim().match(/[;{}]/)) {
+            while ($prevWord && ($prevWord.tagName === 'BR' || $prevWord.innerText.trim() === '')) {
                 $prevWord = $prevWord.previousElementSibling;
             }
+
 
             if ($prevWord) {
                 $currentWord.classList.remove('active');
@@ -120,8 +176,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 if ($prevLetter) {
                     $prevLetter.classList.add('active');
                 }
-                
-                $input.value = '';
+
+                $input.value = Array.from($prevWord.querySelectorAll('letter.correct, letter.incorrect')).map($el => {
+                    return $el.classList.contains('correct') ? $el.innerText : '';
+                }).join('');
             }
             return;
         }
@@ -149,7 +207,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         $nextLetter.classList.add('active');
                     }
 
-                    $input.value = ''; 
+                    $input.value = '';
                 }
                 return;
             }
@@ -173,52 +231,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 const classToAdd = MissedL ? 'marked' : 'correct';
                 $currentWord.classList.add(classToAdd);
-                
-                if (isLastCharacter()) {
-                    gameOver();
-                }
 
                 return;
-            }
-        }
-
-        if (key === 'Backspace') {
-            const $prevWord = $currentWord.previousElementSibling;
-            const $prevLetter = $currentLetter.previousElementSibling;
-            
-            if (!$prevWord && !$prevLetter) {
-                event.preventDefault();
-                return;
-            }
-
-            if ($currentLetter.innerText === '' && $prevWord && $prevWord.tagName === 'BR') {
-                event.preventDefault();
-                $p.removeChild($prevWord);
-                $currentWord.classList.remove('active');
-
-                const $lastWord = $p.querySelector('word:last-of-type');
-                if ($lastWord) {
-                    const $lastLetter = $lastWord.querySelector('letter:last-child');
-                    $lastWord.classList.add('active');
-                    $lastLetter.classList.add('active');
-                }
-                return;
-            }
-
-            const $wordMarked = $p.querySelector('word.marked');
-            if ($wordMarked && !$prevLetter) {
-                event.preventDefault();
-                $prevWord.classList.remove('marked');
-                $prevWord.classList.add('active');
-
-                const $letterGo = $prevWord.querySelector('letter:last-child');
-
-                $currentLetter.classList.remove('active');
-                $letterGo.classList.add('active');
-
-                $input.value = Array.from($prevWord.querySelectorAll('letter.correct, letter.incorrect')).map($el => {
-                    return $el.classList.contains('correct') ? $el.innerText : '*';
-                }).join('');
             }
         }
     }
@@ -256,18 +270,17 @@ document.addEventListener('DOMContentLoaded', function() {
             $currentLetter.classList.add('active', 'is-last');
         }
 
-        if (isLastCharacter()) {
+        if (isLastWordCompleted($currentWord)){
             gameOver();
         }
     }
 
-    function isLastCharacter() {
+    function isLastWordCompleted($currentword) {
         const $lastWord = $p.querySelector('word:last-of-type');
-        const $lastLetter = $lastWord.querySelector('letter:last-of-type');
-        const $activeWord = $p.querySelector('word.active');
-        const $activeLetter = $activeWord.querySelector('letter.active');
+        const totalLetters = $lastWord.querySelectorAll('letter').length;
+        const writtenLetters = $lastWord.querySelectorAll('letter.correct, letter.incorrect').length;
 
-        return $activeWord === $lastWord && $activeLetter == $lastLetter;
+        return $currentword === $lastWord && totalLetters === writtenLetters;
     }
 
     function gameOver() {
@@ -285,7 +298,7 @@ document.addEventListener('DOMContentLoaded', function() {
             ? (correctLetter / totalLetters) * 100
             : 0;
 
-        const cpm = correctLetter * 60 / INITIAL_TIME;
+        const cpm = correctLetter * 60 / (INITIAL_TIME - currentTime);
         $cpm.textContent = cpm;
         $accuracy.textContent = `${accuracy.toFixed(2)}%`;
 
