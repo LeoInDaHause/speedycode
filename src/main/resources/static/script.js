@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let exercises = [];
     let currentTime = INITIAL_TIME;
     let intervalId = null;
-    let gameStarted = false; 
+    let gameStarted = false;
 
     function loadExercises() {
         return fetch('ejercicios.txt')
