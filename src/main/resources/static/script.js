@@ -158,7 +158,9 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (event.key === '0' || event.code === 'Digit0') {
             const $prevElement = $currentWord.previousElementSibling;
-            if ($prevElement && $prevElement.tagName === 'BR') {
+            const $firstLetter = $currentWord.querySelector('letter:first-child');
+        
+            if ($prevElement && $prevElement.tagName === 'BR' && $currentLetter === $firstLetter) {
                 event.preventDefault();
         
                 let $prevWord = $currentWord.previousElementSibling;
@@ -168,6 +170,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
         
                 if ($prevWord) {
+                    // Guardar la palabra mal escrita
                     const incorrectWord = $input.value;
         
                     $currentWord.classList.remove('active');
@@ -178,6 +181,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     if ($prevLetter) {
                         $prevLetter.classList.add('active');
                     }
+        
                     $input.value = incorrectWord;
                 }
             }
