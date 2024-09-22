@@ -163,7 +163,14 @@ document.addEventListener('DOMContentLoaded', function() {
         if (key === 'Enter') {
             event.preventDefault();
         
+            const $lastLetter = $currentWord.lastElementChild;
+
+            if ($currentLetter !== $lastLetter) {
+                return;
+            }
+
             let $nextWord = $currentWord.nextElementSibling;
+            
             while ($nextWord && $nextWord.tagName !== 'BR') {
                 $nextWord = $nextWord.nextElementSibling;
             }
