@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let exercises = [];
     let currentTime = INITIAL_TIME;
     let intervalId = null;
-    let gameStarted = false;
+    let gameStarted = false; 
 
     function loadExercises() {
         return fetch('ejercicios.txt')
@@ -213,6 +213,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
         }
+
+        // Asegurarse de que el input siempre tenga el foco
         setTimeout(() => $input.focus(), 0);
     }
 
@@ -252,6 +254,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (isLastWordCompleted($currentWord)){
             gameOver();
         }
+
+        // Asegurarse de que el input siempre tenga el foco
         setTimeout(() => $input.focus(), 0);
     }
 
