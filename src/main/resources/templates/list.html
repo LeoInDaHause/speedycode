@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
@@ -14,25 +15,29 @@
 
     <body>
         <header>
+
             <h1>Speedy Code</h1>
-            <a class="button" href="/register.html" th:href="@{/register}">Log in</a>
+            
             <div class="container">
+                <a class="button" href="/register.html" th:href="@{/register}">Log in</a>
                 <a href="user.html" th:href="@{/user}"><img src="/config/img/user.png" th:src="@{/config/img/user.png}" alt="imagen" class="imagen"></a>
                 <p th:text="${userEmail}"></p>
             </div>
+
         </header>
 
         <main>
             <h2>Listado de Ejercicios</h2>
+
             <div class="list" id="easy">
 
-                <h3 style="background-color: #00ff40da;">Facil</h3>
+                <h3 style="background-color: #00ff40da;">Fácil</h3>
                 <div class="block">
                     
                     <a href="code.html" th:href="@{/code}"  >Ejercicio  1</a>
                     <p th:class="${color1}" th:text="${color1 == 'completed' ? 'Completado' : 'No Completado'}"></p>
                 </div>
-                
+        
                 <div class="block">
                     <a href="code.html" th:href="@{/code}" >Ejercicio 2</a>
                     <p th:class="${color2}" th:text="${color2 == 'completed' ? 'Completado' : 'No Completado'}"></p>
@@ -77,7 +82,7 @@
 
             <div class="list" id="hard">
 
-                <h3 style="background-color: #ff0000ea;">Dificil</h3>
+                <h3 style="background-color: #ff0000ea;">Difícil</h3>
                 <div class="block">
                     <a href="code.html" th:href="@{/code}" >Ejercicio 1</a>
                     <p th:class="${color9}" th:text="${color9 == 'completed' ? 'Completado' : 'No Completado'}"></p>

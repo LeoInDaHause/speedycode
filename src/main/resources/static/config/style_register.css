@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
-
 body {
     background-color: #2A2A2B;
     font-family: "Inter", sans-serif;
@@ -21,24 +20,25 @@ h1 {
 main {
     grid-area: main;
     display: flex;
-    justify-content: center;
+    justify-content: center; 
+    align-items: center; 
     padding: 20px;
 }
 
 .container {
     display: flex;
-    justify-content: space-between; 
-    align-items: flex-start; 
+    justify-content: space-between;
+    align-items: stretch; 
     flex-wrap: nowrap; 
     gap: 20px; 
-    width: 100%; 
+    width: 100%;
+    max-width: 1000px;
 }
 
 .formulario {
-    margin: 0 40px;
-    flex: 1 1 auto;
+    flex: 1 1 auto; 
     max-width: 480px;
-    min-width: 350px;
+    min-width: 350px;  
     height: 380px;
     background: rgba(72, 78, 79, 0.2);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -48,10 +48,10 @@ main {
 }
 
 .vertical-line {
-    height: 350px;
-    width: 2px;
+    flex: 0 0 2px; 
     background-color: #18B0B0;
-    margin: 15px 0;
+    height: auto; 
+    margin: 0 30px 0 30px; 
 }
 
 h2 {
@@ -148,9 +148,10 @@ footer {
 }
 
 h3 {
-    font-family: "Julius Sans One", sans-serif;
     font-size: 16px;
     color: #000000;
+    font-weight: 400;
+    text-transform: uppercase; 
 }
 
 .error-message {
