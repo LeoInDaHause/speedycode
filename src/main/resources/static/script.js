@@ -103,24 +103,16 @@ document.addEventListener('DOMContentLoaded', function() {
         const { key } = event;
 
         if (key === 'Backspace') {
-            const $prevWord = $currentWord.previousElementSibling;
+            let $prevWord = $currentWord.previousElementSibling;
             const $prevLetter = $currentLetter.previousElementSibling;
         
             if (!$prevWord && !$prevLetter) {
                 event.preventDefault();
                 return;
             }
-
-            if ($currentLetter.innerText === '' && $prevLetter) {
-                event.preventDefault();
-                $currentWord.removeChild($currentLetter);
-                $currentLetter.classList.remove('active');
         
-                const $lastLetter = $currentWord.querySelector('letter:last-child');
-                if ($lastLetter) {
-                    $lastLetter.classList.add('active');
-                }
-                return;
+            while ($prevWord && ($prevWord.tagName === 'BR' || $prevWord.innerText.trim() === '')) {
+                $prevWord = $prevWord.previousElementSibling;
             }
         
             if ($currentLetter.innerText === '' && $prevWord && $prevWord.tagName === 'BR') {
@@ -152,11 +144,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     return $el.classList.contains('correct') ? $el.innerText : '*';
                 }).join('');
             }
-
+        
             if ($currentWord && $currentWord.previousElementSibling && $currentWord.previousElementSibling.tagName === 'BR') {
-                event.preventDefault();
                 const $prevLineLastWord = $currentWord.previousElementSibling.previousElementSibling;
-                if ($prevLineLastWord) {
+                if ($prevLineLastWord && $currentLetter === $currentWord.querySelector('letter:first-child')) {
+                    event.preventDefault();
                     const $lastLetter = $prevLineLastWord.querySelector('letter:last-child');
                     $currentWord.classList.remove('active');
                     $currentLetter.classList.remove('active');
