@@ -103,46 +103,115 @@ document.addEventListener('DOMContentLoaded', function() {
         const { key } = event;
 
         if (key === 'Backspace') {
-            // Existing Backspace logic
+            let $prevWord = $currentWord.previousElementSibling;
+            const $prevLetter = $currentLetter.previousElementSibling;
+        
+            if (!$prevWord && !$prevLetter) {
+                event.preventDefault();
+                return;
+            }
+        
+            while ($prevWord && ($prevWord.tagName === 'BR' || $prevWord.innerText.trim() === '')) {
+                $prevWord = $prevWord.previousElementSibling;
+            }
+        
+            if ($currentLetter.innerText === '' && $prevWord && $prevWord.tagName === 'BR') {
+                event.preventDefault();
+                $p.removeChild($prevWord);
+                $currentWord.classList.remove('active');
+        
+                const $lastWord = $p.querySelector('word:last-of-type');
+                if ($lastWord) {
+                    const $lastLetter = $lastWord.querySelector('letter:last-child');
+                    $lastWord.classList.add('active');
+                    $lastLetter.classList.add('active');
+                }
+                return;
+            }
+        
+            const $wordMarked = $p.querySelector('word.marked');
+            if ($wordMarked && !$prevLetter) {
+                event.preventDefault();
+                $prevWord.classList.remove('marked');
+                $prevWord.classList.add('active');
+        
+                const $letterGo = $prevWord.querySelector('letter:last-child');
+        
+                $currentLetter.classList.remove('active');
+                $letterGo.classList.add('active');
+        
+                $input.value = Array.from($prevWord.querySelectorAll('letter.correct, letter.incorrect')).map($el => {
+                    return $el.classList.contains('correct') ? $el.innerText : '*';
+                }).join('');
+            }
+        
+            if ($currentWord && $currentWord.previousElementSibling && $currentWord.previousElementSibling.tagName === 'BR') {
+                const $prevLineLastWord = $currentWord.previousElementSibling.previousElementSibling;
+                if ($prevLineLastWord && $currentLetter === $currentWord.querySelector('letter:first-child')) {
+                    event.preventDefault();
+                    const $lastLetter = $prevLineLastWord.querySelector('letter:last-child');
+                    $currentWord.classList.remove('active');
+                    $currentLetter.classList.remove('active');
+                    $prevLineLastWord.classList.add('active');
+                    $lastLetter.classList.add('active');
+                    $currentWord = $prevLineLastWord;
+                    $currentLetter = $lastLetter;
+                }
+            }
         }
 
         if (key === 'Enter') {
             event.preventDefault();
-
-            const $nextWord = $currentWord.nextElementSibling;
-            const $lastLetter = $currentWord.querySelector('letter:last-child');
-
-            if ($currentLetter === $lastLetter) {
-                while ($nextWord && $nextWord.tagName !== 'BR') {
+        
+            let $nextWord = $currentWord.nextElementSibling;
+            while ($nextWord && $nextWord.tagName !== 'BR') {
+                $nextWord = $nextWord.nextElementSibling;
+            }
+        
+            if ($nextWord) {
+                $nextWord = $nextWord.nextElementSibling;
+                while ($nextWord && ($nextWord.innerText.trim() === '' || $nextWord.tagName === 'BR')) {
                     $nextWord = $nextWord.nextElementSibling;
                 }
-
+        
                 if ($nextWord) {
-                    $nextWord = $nextWord.nextElementSibling;
-                    while ($nextWord && ($nextWord.innerText.trim() === '' || $nextWord.tagName === 'BR')) {
-                        $nextWord = $nextWord.nextElementSibling;
+                    const $nextLetter = $nextWord.querySelector('letter');
+        
+                    $currentWord.classList.remove('active', 'marked');
+                    $currentLetter.classList.remove('active');
+        
+                    $nextWord.classList.add('active');
+                    if ($nextLetter) {
+                        $nextLetter.classList.add('active');
                     }
-
-                    if ($nextWord) {
-                        const $nextLetter = $nextWord.querySelector('letter');
-
-                        $currentWord.classList.remove('active', 'marked');
-                        $currentLetter.classList.remove('active');
-
-                        $nextWord.classList.add('active');
-                        if ($nextLetter) {
-                            $nextLetter.classList.add('active');
-                        }
-
-                        $input.value = '';
-                    }
+        
+                    $input.value = '';
                 }
             }
             return;
         }
 
         if (key === ' ') {
-            // Existing Space logic
+            event.preventDefault();
+
+            const $nextWord = $currentWord.nextElementSibling;
+            if ($nextWord && $nextWord.tagName !== 'BR') {
+                const $nextLetter = $nextWord.querySelector('letter');
+
+                $currentWord.classList.remove('active', 'marked');
+                $currentLetter.classList.remove('active');
+
+                $nextWord.classList.add('active');
+                if ($nextLetter) $nextLetter.classList.add('active');
+                $input.value = '';
+
+                const MissedL = $currentWord.querySelectorAll('letter:not(.correct)').length > 0;
+
+                const classToAdd = MissedL ? 'marked' : 'correct';
+                $currentWord.classList.add(classToAdd);
+
+                return;
+            }
         }
     }
 
