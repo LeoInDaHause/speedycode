@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let exercises = [];
     let currentTime = INITIAL_TIME;
     let intervalId = null;
-    let gameStarted = false; 
+    let gameStarted = false;
 
     function loadExercises() {
         return fetch('ejercicios.txt')
@@ -51,12 +51,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
         $time.textContent = currentTime;
         $p.innerHTML = lines.map(line => {
-            const words = line.split(/(\s+)/); // Split by spaces but keep them
+            const words = line.split(' ');
             return words.map(word => {
                 const letters = word.split('');
                 return `<word>${letters.map(letter => `<letter>${letter}</letter>`).join('')}</word>`;
-            }).join('');
-        }).join('<br>'); 
+            }).join(' ');
+        }).join('<br>');
 
         const $firstWord = $p.querySelector('word');
         if ($firstWord) {
