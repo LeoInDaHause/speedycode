@@ -4,8 +4,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const $input = document.querySelector('input');
     const $game = document.querySelector('#game');
     const $results = document.querySelector('#results');
+    const $difficulty = document.querySelector('#results-difficulty');
     const $cpm = $results.querySelector('#results-cpm');
     const $accuracy = $results.querySelector('#results-accuracy');
+    const $timem = $results.querySelector('#results-time');
     const $button = document.querySelector('#reload-button');
 
     const INITIAL_TIME = 30;
@@ -278,9 +280,13 @@ document.addEventListener('DOMContentLoaded', function() {
         $game.style.display = 'none';
         $results.style.display = 'flex';
 
+        const difficulty = "Hola";
         const correctWords = $p.querySelectorAll('word.correct').length;
         const correctLetter = $p.querySelectorAll('letter.correct').length;
         const incorrectLetter = $p.querySelectorAll('letter.incorrect').length;
+        const skippedWords = $p.querySelectorAll('word:not(.correct):not(.incorrect)').length;
+        const incorrectWords = $p.querySelectorAll('word.incorrect').length;
+        const totalWords = correctWords + incorrectWords + skippedWords;
 
         const totalLetters = correctLetter + incorrectLetter;
 
@@ -288,14 +294,24 @@ document.addEventListener('DOMContentLoaded', function() {
             ? (correctLetter / totalLetters) * 100
             : 0;
 
+        $difficulty.textContent = difficulty;
         const cpm = correctLetter * 60 / (INITIAL_TIME - currentTime);
         $cpm.textContent = cpm;
         $accuracy.textContent = `${accuracy.toFixed(2)}%`;
+
+        document.getElementById('correct-words').textContent = correctWords;
+        document.getElementById('incorrect-words').textContent = incorrectWords;
+        document.getElementById('skipped-words').textContent = skippedWords;
+        document.getElementById('total-words').textContent = totalWords;
+
+        const timem = INITIAL_TIME - currentTime;
+        $timem.textContent = timem;
 
         const instructions = document.getElementById('instructions');
         if (instructions) {
             instructions.style.display = 'none';
         }
+
     }
 
     loadExercises().then(() => {

@@ -113,7 +113,7 @@
             opacity: .4;
             margin: 0;
             font-size: 30px;
-            color: white;
+            color: var(--white);
             text-align: center;
         }
 
@@ -180,7 +180,7 @@
 <body>
     <div>Speedy code</div>
     <div id="instructions" class="instructions">
-        "Espacio" -> Pasar de palabra / "Enter" -> Pasar de línea en el último caracter / "Retroceso" -> Retroceder a la letra, palabra, o línea anterior
+        "Espacio" -> Move to the next word / "Enter" -> Move to the next line after the last character / "Retroceso" ->  Go back to the previous letter, word, or line
     </div>
     <main>
         <section id="game">
@@ -189,11 +189,25 @@
             <input autofocus>
         </section>
         <section id="results">
-            <h2>cpm</h2>
+            <h2>Difficulty</h2>
+            <h3 id="results-difficulty"></h3>
+            
+            <h2>CPM</h2>
             <h3 id="results-cpm"></h3>
             
-            <h2>accuracy</h2>
-            <h3 id="results-accuracy"></h3>
+            <h2>Acuraccy</h2>
+            <h3 id="results-accuracy"></h3>''
+
+            <h2>Words</h2>
+            <h3 id="results-caracteres">
+                Correct: <span id="correct-words">0</span> /
+                Incorrect: <span id="incorrect-words">0</span> /
+                Skipped: <span id="skipped-words">0</span>
+                Total: <span id="total-words">0</span>
+            </h3>
+
+            <h2>Time</h2>
+            <h3 id="results-time"></h3>
             
             <button id="reload-button">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
@@ -204,8 +218,8 @@
                 </svg>
             </button>
             <div id="agradecimientos">
-                <h2>Agradecimientos</h2>
-                <p>Este proyecto fue realizado con la ayuda del tutorial de <a href="https://www.youtube.com/watch?v=157qVlTelOg" target="_blank" class="cyan-link"> @Midulive</a>.</p>
+                <h2>Acknowledgments</h2>
+                <p>This project was made with the help of the tutorial by <a href="https://www.youtube.com/watch?v=157qVlTelOg" target="_blank" class="cyan-link"> @Midulive</a>.</p>
             </div>
         </section>
     </main>
