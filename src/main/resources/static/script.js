@@ -345,7 +345,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (instructions) {
             instructions.style.display = 'none';
         }
-
     }
 
     loadExercises().then(() => {
