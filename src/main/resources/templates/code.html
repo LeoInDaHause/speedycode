@@ -73,9 +73,14 @@
             }
         }
 
+        word.incorrect {
+            border-bottom: 2.5px solid var(--red);
+        }
+
         letter {
-            display: inline-block; 
-            white-space: nowrap; 
+            display: inline-block;
+            white-space: nowrap;
+            position: relative;
         }
 
         letter.correct {
@@ -83,7 +88,7 @@
         }
 
         letter.incorrect {
-            color: var(--red); 
+            color: var(--red);
         }
 
         letter.active::before {
@@ -92,6 +97,7 @@
             color: var(--cyan);
             position: absolute;
             animation: 1s blink infinite ease-in-out;
+            left: -55%;
         }
 
         #game {
@@ -113,7 +119,7 @@
             opacity: .4;
             margin: 0;
             font-size: 30px;
-            color: var(--white);
+            color: var(--cyan);
             text-align: center;
         }
 
@@ -121,7 +127,7 @@
             font-weight: 400;
             margin: 0;
             font-size: 30px;
-            color: var(--cyan);
+            color: var(--white);
             text-align: center;
         }
 
@@ -180,7 +186,7 @@
 <body>
     <div>Speedy code</div>
     <div id="instructions" class="instructions">
-        "Espacio" -> Move to the next word / "Enter" -> Move to the next line after the last character / "Retroceso" ->  Go back to the previous letter, word, or line
+        "Space" -> Move to the next word / "Enter" -> Move to the next line after the last character / "Backslide" ->  Go back to the previous letter, word, or line
     </div>
     <main>
         <section id="game">
@@ -191,23 +197,23 @@
         <section id="results">
             <h2>Difficulty</h2>
             <h3 id="results-difficulty"></h3>
+
+            <h2>Time</h2>
+            <h3 id="results-time"></h3>
             
             <h2>CPM</h2>
             <h3 id="results-cpm"></h3>
             
             <h2>Acuraccy</h2>
-            <h3 id="results-accuracy"></h3>''
+            <h3 id="results-accuracy"></h3>
 
-            <h2>Words</h2>
+            <h2>Characters</h2>
             <h3 id="results-caracteres">
-                Correct: <span id="correct-words">0</span> /
-                Incorrect: <span id="incorrect-words">0</span> /
-                Skipped: <span id="skipped-words">0</span>
-                Total: <span id="total-words">0</span>
+                Correct: <span id="correct-characters">0</span> /
+                Incorrect: <span id="incorrect-characters">0</span> /
+                Missed: <span id="skipped-characters">0</span> /
+                Total: <span id="total-characters">0</span>
             </h3>
-
-            <h2>Time</h2>
-            <h3 id="results-time"></h3>
             
             <button id="reload-button">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
