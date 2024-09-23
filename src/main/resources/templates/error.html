@@ -3,13 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="" th:href="@{css/style.css}"/>
+    <link rel="stylesheet" type="text/css" href="config/style_dificulty.css" th:href="@{config/style_difficulty.css}"/>
     
 <head>
     <title>Error Page</title>
 </head>
+
 <body>
-    <h1 style="color: black" th:text="${errorMessage}">Error occurred</h1>
-    <a th:href="@{/}">Go to Home</a>
+    <header>
+        <h1>Speedy Code</h1>
+
+        <div class="container">
+            <a class="button" href="index.html" th:href="@{/index}">Regresar</a>
+        </div>
+
+    </header>
+
+    <h1 th:text="${errorMessage}">Error occurred</h1>
+    <p th:text="${errorDetails}">Details about the error</p>
+
+    <footer>
+        <h4>Speedy Code @2024</h4>
+    </footer>
 </body>
 </html>

@@ -53,8 +53,8 @@ a.button {
   width: 600px;
   height: 62px;
   font-size: 27px;
+  text-align: center;
 }
-
 
 .button:hover {
   background-color: #46D1D1;
@@ -69,8 +69,8 @@ header .button {
 .separator {
   color: #CCCCCC;
   border-width: 1px;
-  width: 93vw; 
-  max-width: 1260px; 
+  width: 100vw; 
+  max-width: 1360px; 
   margin: 0 auto;
 }
 
@@ -91,7 +91,7 @@ main {
 h2 {
   font-size: 30px;
   font-weight: 250;
-  margin: -5px 0px 0px 20px;
+  margin: 0px 0px 20px 0px;
   text-align: left;
 }
 
@@ -109,7 +109,7 @@ p {
   word-wrap: break-word;
   display: flex;
   flex-direction: column;
-  align-items: center; 
+  align-items: flex-start; 
   justify-content: center; 
 }
 
@@ -128,11 +128,13 @@ main .text .button {
   margin-bottom: 0px;
   max-width: 300px;
   text-align: center;
+  align-self: center;
 }
 
 main .text h3 {
+  align-self: center;
   margin-top: 10px;
-  text-align: left;
+  text-align: center; 
   font-weight: 600;
 }
 
@@ -161,6 +163,7 @@ footer .additional img {
   margin-right: 15px;
   object-fit: contain;
 }
+
 .final{
   color: #000000;
   margin-bottom: 0;

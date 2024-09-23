@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
+</head>
+
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
@@ -9,18 +12,21 @@
 
         <meta name="robots" content="noindex, nofollow">
         <meta name="theme-color" content="#09f">
+
     </head>
 
     <body>
+
         <header>
-            <h1>Speedy CODE</h1>
+            <h1>Speedy Code</h1>
             <a class="button" href="index.html" th:href="@{/log_out}">Cerrar Sesión</a>
         </header>
 
         <main>
-            <h2>Configuracion Speedy Code</h2>
+
+            <h2>Configuración Usuario</h2>
             <div class="container">
-                <h3>Correo:</h3>
+                <h3>Correo</h3>
                 <p th:text="${userEmail}"></p>
 
                 <form id="changeEmail" action="change_email" method="post">
@@ -38,7 +44,7 @@
             </div>
 
             <div class="container">
-                <h3> Cambiar Contraseña:</h3>
+                <h3> Cambiar Contraseña </h3>
 
                 <form id="changePassword" action="change_password" method="post">
                     <label for="password">Ingrese contraseña actual:</label>
@@ -62,7 +68,7 @@
         </main>
 
         <footer>
-            <h3>Speedy Code @2024</h3>
+            <h4>Speedy Code @2024</h4>
         </footer>
 
     </body>
