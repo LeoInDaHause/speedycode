@@ -10,7 +10,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const $timem = $results.querySelector('#results-time');
     const $button = document.querySelector('#reload-button');
 
-    const INITIAL_TIME = 30;
+    const DEFAULT_TIME = 30;
+    let gameTime = DEFAULT_TIME;
+    let gameStarted = false;
 
     const instructions = document.getElementById('instructions');
     if (instructions) {
@@ -18,9 +20,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     let exercises = [];
-    let currentTime = INITIAL_TIME;
+    let currentTime = gameTime;
     let intervalId = null;
-    let gameStarted = false;
 
     function loadExercises() {
         return fetch('ejercicios.txt')
@@ -48,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const TEXT = getRandomExercise();
         const lines = TEXT.split('\n');
-        currentTime = INITIAL_TIME;
+        currentTime = gameTime;
         gameStarted = false;
 
         $time.textContent = currentTime;
@@ -77,6 +78,19 @@ document.addEventListener('DOMContentLoaded', function() {
         $input.addEventListener('keydown', onKeyDown);
         $input.addEventListener('input', onInput);
         $button.addEventListener('click', initGame);
+
+        document.getElementById('15-button').addEventListener('click', () => updateGameTime(15));
+        document.getElementById('30-button').addEventListener('click', () => updateGameTime(30));
+        document.getElementById('60-button').addEventListener('click', () => updateGameTime(60));
+        document.getElementById('90-button').addEventListener('click', () => updateGameTime(90));
+    }
+
+    function updateGameTime(seconds) {
+        if (!gameStarted) {
+            gameTime = seconds;
+            currentTime = gameTime;
+            $time.textContent = currentTime;
+        }
     }
 
     function startTimer() {
@@ -309,8 +323,8 @@ document.addEventListener('DOMContentLoaded', function() {
             : 0;
 
         $difficulty.textContent = difficulty;
-        const cpm = correctLetters * 60 / (INITIAL_TIME - currentTime);
-        $cpm.textContent = cpm;
+        const cpm = correctLetters * 60 / (gameTime - currentTime);
+        $cpm.textContent = cpm.toFixed(2);
         $accuracy.textContent = `${accuracy.toFixed(2)}%`;
 
         document.getElementById('correct-characters').textContent = correctLetters;
@@ -318,7 +332,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('skipped-characters').textContent = skippedLetters;
         document.getElementById('total-characters').textContent = totalLetters;
 
-        const timem = INITIAL_TIME - currentTime;
+        const timem = gameTime - currentTime;
         $timem.textContent = timem;
 
         const instructions = document.getElementById('instructions');
