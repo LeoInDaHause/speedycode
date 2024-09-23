@@ -75,6 +75,12 @@ document.addEventListener('DOMContentLoaded', function() {
         document.addEventListener('keydown', () => {
             $input.focus();
         });
+
+        // Add touchstart event for mobile devices
+        document.addEventListener('touchstart', () => {
+            $input.focus();
+        });
+
         $input.addEventListener('keydown', onKeyDown);
         $input.addEventListener('input', onInput);
         $button.addEventListener('click', initGame);
