@@ -9,54 +9,57 @@
     <meta name="theme-color" content="#09f">
 </head>
 <body>
-    <h1>Ingresa a Speedy Code</h1>
+    
+    <h1>Enter Speedy Code</h1>
     <main>
         <div class="container">
             <div class="formulario">
-                <h2>Inicio de sesión</h2>
+                <h2>Log In</h2>
                 <form id="login" action="login_user" method="post">
                     <div class="input-group">
                         <input type="email" id="email" name="email" placeholder=" " required>
-                        <label for="email">Correo electrónico</label>
+                        <label for="email">Email Address</label>
                         <span></span>
                     </div>
                     <div class="input-group">
                         <input type="password" id="password" name="password" placeholder=" " required>
-                        <label for="password">Contraseña</label>
+                        <label for="password">Password</label>
                         <span></span>
                     </div>
                     <p id="error-message" class="error-message" th:text="${errorMessage2}"></p>
-                    <div class="recordar">¿Olvidó su contraseña?</div>
-                    <input type="submit" value="Iniciar">
+                    <div class="recordar">Forgot your password?</div>
+                    <input type="submit" value="Log In">
+                    
                 </form>
             </div>
             <div class="vertical-line"></div>
 
             <div class="formulario">
-                <h2>Crear una cuenta</h2>
+                <h2>Create an Account</h2>
                 <form id="register" action="register_user" method="post">
                     <div class="input-group">
                         <input type="email" id="register_email" name="email" placeholder=" " required>
-                        <label for="register_email">Correo electrónico</label>
+                        <label for="register_email">Email Address</label>
                         <span></span>
                     </div>
                     <div class="input-group">
                         <input type="password" id="register_password" name="password" placeholder=" " required>
-                        <label for="register_password">Contraseña</label>
+                        <label for="register_password">Password</label>
                         <span></span>
                     </div>
                     <div class="input-group">
                         <input type="password" id="conf_password" name="conf_password" placeholder=" " required>
-                        <label for="conf_password">Confirmar contraseña</label>
+                        <label for="conf_password">Confirm Password</label>
                         <span></span>
                     </div>
                     <p id="error-message" class="error-message" th:text="${errorMessage}"></p>
-                    <input type="submit" value="Registrarse">
+                    <input type="submit" value="Sign Up">
                 </form>
             </div>
         </div>
     </main>
     <footer>
+        <hr class="separator" style="background-color: #2e5870;">
         <h3>Speedy Code @2024</h3>
     </footer>
 </body>

@@ -19,51 +19,51 @@
 
         <header>
             <a class="redireccion" href="index.html" th:href="@{/index}">Speedy Code</a></a>
-            <a class="button" href="index.html" th:href="@{/log_out}">Cerrar Sesión</a>
+            <a class="button" href="index.html" th:href="@{/log_out}">Log Out</a>
         </header>
 
         <main>
 
-            <h2>Configuración Usuario</h2>
+            <h2>User Settings</h2>
             <div class="container">
-                <h3>Correo</h3>
+                <h3>Email</h3>
                 <p th:text="${userEmail}"></p>
 
                 <form id="changeEmail" action="change_email" method="post">
-                    <label for="correo">Cambiar Correo:</label>
+                    <label for="correo">Change Email:</label>
                     <input type="email" id="email" name="email" required>
 
-                    <label for="con_correo">Confirmar Correo:</label>
+                    <label for="con_correo">Confirm Email:</label>
                     <input type="email" id="conf_email" name="conf_email" required>
 
                     <p id="error-message" class="error-message" th:text="${errorMessage1}"></p>
                     <p id="info-message" class="info-message" th:text="${infoMessage1}" style="color: #35ec63; justify-content: center;"></p>
 
-                    <input type="submit" value="Cambiar" id="conf">
+                    <input type="submit" value="Change" id="conf">
                 </form>
             </div>
 
             <div class="container">
-                <h3> Cambiar Contraseña </h3>
+                <h3> Change Password </h3>
 
                 <form id="changePassword" action="change_password" method="post">
-                    <label for="password">Ingrese contraseña actual:</label>
+                    <label for="password">Enter Current Password:</label>
                     <input type="password" id="current_password" name="current_password" required>
 
-                    <label for="new_password">Cambiar Contraseña:</label>
+                    <label for="new_password">Change Password:</label>
                     <input type="password" id="new_password" name="new_password" required>
 
-                    <label for="con_password">Confirmar Contraseña:</label>
+                    <label for="con_password">Confirm Password:</label>
                     <input type="password" id="conf_password" name="conf_password" required>
 
                     <p id="error-message" class="error-message" th:text="${errorMessage2}"></p>
                     <p id="info-message" class="info-message" th:text="${infoMessage2}" style="color: #35ec63; justify-content: center;"></p>
 
-                    <input type="submit" value="Cambiar" id="conf">
+                    <input type="submit" value="Change" id="conf">
                 </form>
             </div>
 
-            <a class="button" id="dificulty" href="difficulty.html" th:href="@{/difficulty}">Actividades</a>
+            <a class="button" id="dificulty" href="difficulty.html" th:href="@{/difficulty}">Activities</a>
 
         </main>
 

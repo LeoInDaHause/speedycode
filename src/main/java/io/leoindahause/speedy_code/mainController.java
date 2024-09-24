@@ -45,7 +45,7 @@ public class mainController {
     public String registerUser(@RequestParam String email, @RequestParam String password,
             @RequestParam String conf_password, Model model, HttpSession session) {
         if (!password.equals(conf_password)) {
-            model.addAttribute("errorMessage", "Las contraseñas no coinciden.");
+            model.addAttribute("errorMessage", "The passwords do not match.");
             return "register";
         }
 
@@ -56,7 +56,7 @@ public class mainController {
         boolean emailExists = userRepository.existsByEmail(email);
 
         if (emailExists) {
-            model.addAttribute("errorMessage", "El correo electrónico ya existe.");
+            model.addAttribute("errorMessage", "The email already exists.");
             return "register";
 
         } else {
@@ -83,7 +83,7 @@ public class mainController {
         User user = userRepository.findByEmail(email);
 
         if (user == null || !user.getPassword().equals(password)) {
-            model.addAttribute("errorMessage2", "Correo electrónico o contraseña incorrectos.");
+            model.addAttribute("errorMessage2", "Incorrect email or password.");
             return "register";
         }
 
@@ -113,13 +113,13 @@ public class mainController {
 
         if (!email.equals(conf_email)) {
             model.addAttribute("userEmail", user.getEmail());
-            model.addAttribute("errorMessage1", "Los correos electrónicos no coinciden.");
+            model.addAttribute("errorMessage1", "The emails do not match.");
             return "user";
         }
 
         if (userRepository.existsByEmail(email)) {
             model.addAttribute("userEmail", user.getEmail());
-            model.addAttribute("errorMessage1", "El correo electrónico ya existe.");
+            model.addAttribute("errorMessage1", "The email already exists.");
             return "user";
         }
 
@@ -129,10 +129,10 @@ public class mainController {
 
             session.setAttribute("user", user);
             model.addAttribute("userEmail", user.getEmail());
-            model.addAttribute("infoMessage1", "Correo electrónico actualizado correctamente.");
+            model.addAttribute("infoMessage1", "Email updated successfully.");
         } catch (Exception e) {
             model.addAttribute("errorMessage1",
-                    "Error al actualizar el correo electrónico. Por favor, inténtelo de nuevo.");
+                    "Error updating the email. Please try again.");
             return "user";
         }
 
@@ -146,18 +146,18 @@ public class mainController {
         User user = (User) session.getAttribute("user");
 
         if (!user.getPassword().equals(current_password)) {
-            model.addAttribute("errorMessage2", "Contraseña actual incorrecta.");
+            model.addAttribute("errorMessage2", "Incorrect current password.");
             return "user";
         }
 
         if (!new_password.equals(conf_password)) {
-            model.addAttribute("errorMessage2", "Las contraseñas no coinciden.");
+            model.addAttribute("errorMessage2", "The passwords do not match.");
             return "user";
         }
 
         user.setPassword(conf_password);
         userRepository.save(user);
-        model.addAttribute("infoMessage2", "Contraseña actualizada correctamente.");
+        model.addAttribute("infoMessage2", "Password updated successfully.");
 
         return "user";
     }

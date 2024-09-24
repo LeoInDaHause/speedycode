@@ -98,8 +98,8 @@ h2 {
 p {
   margin-top: 0;
   text-align: left;
-  line-height: 1.6;
-  font-size: 18px;
+  line-height: 1.8;
+  font-size: 20px;
 }
 
 .text {
@@ -139,8 +139,8 @@ main .text h3 {
 }
 
 main aside img {
-  width: 50%;
-  height: 50%;
+  width: 80%;
+  height: 80%;
   object-fit: contain;
 }
 
