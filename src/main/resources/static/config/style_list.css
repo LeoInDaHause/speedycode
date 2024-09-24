@@ -26,7 +26,16 @@ header {
     margin-right: 30px;
 }
 
-h1 {
+.separator {
+    color: #CCCCCC;
+    border-width: 1px;
+    width: 100vw; 
+    max-width: 1360px; 
+    margin: 0 auto;
+  }
+
+a.redireccion{
+    text-decoration: none;
     color: #CCCCCC;
     margin: 0;
     font-family: "Inter", sans-serif;
@@ -46,10 +55,9 @@ h1 {
     color: black;
     text-decoration: none;
     transition: background-color 0.5s ease;
-    width: auto;  
     min-width: 120px; 
-    width: 10%;
-    height: 40%;
+    height: 30px;
+    width: auto;  
 }
 
 .button:hover {
@@ -61,10 +69,6 @@ h1 {
     align-items: center;
     gap: 10px; 
     grid-area: user_info;
-    /*     align-items: center;
-    display: block;
-    margin-left: 20px;
-    width: 8%;*/  
 }
 
 img {

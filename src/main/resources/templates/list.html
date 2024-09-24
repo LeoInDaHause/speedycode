@@ -16,14 +16,14 @@
     <body>
         <header>
 
-            <h1>Speedy Code</h1>
+            <a class="redireccion" href="index.html" th:href="@{/index}">Speedy Code</a></a>
             
             <div class="container">
                 <a class="button" href="/register.html" th:href="@{/register}">Log in</a>
                 <a href="user.html" th:href="@{/user}"><img src="/config/img/user.png" th:src="@{/config/img/user.png}" alt="imagen" class="imagen"></a>
                 <p th:text="${userEmail}"></p>
             </div>
-
+            
         </header>
 
         <main>
@@ -108,6 +108,7 @@
         </main>
 
         <footer>
+            <hr class="separator">
             <h4>Speedy Code @2024</h4>
         </footer>
     </body>
