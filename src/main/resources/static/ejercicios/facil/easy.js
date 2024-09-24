@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     
     function loadExercises() {
-        const basePath = '/static/ejercicios/facil/';
+        const basePath = '/ejercicios/facil/';
         const files = ['1.txt', '2.txt', '3.txt', '4.txt'];
     
         const randomFile = basePath + files[Math.floor(Math.random() * files.length)];
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
             instructions.style.display = 'block';
         }
     
-        const TEXT = getRandomExercise();
+        const TEXT = exercises[Math.floor(Math.random() * exercises.length)];
         const lines = TEXT.split('\n');
         currentTime = gameTime;
         gameStarted = false;
@@ -327,7 +327,7 @@ document.addEventListener('DOMContentLoaded', function() {
         $game.style.display = 'none';
         $results.style.display = 'flex';
 
-        const difficulty = "Hola";
+        const difficulty = "Easy";
         const correctLetters = $p.querySelectorAll('letter.correct').length;
         const incorrectLetters = $p.querySelectorAll('letter.incorrect').length;
         const totalLetters = $p.querySelectorAll('letter').length;

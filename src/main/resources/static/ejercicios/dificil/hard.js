@@ -24,17 +24,23 @@ document.addEventListener('DOMContentLoaded', function() {
     let intervalId = null;
 
     function loadExercises() {
-        return fetch('ejercicios.txt')
-            .then(response => response.text())
+        const basePath = '/ejercicios/dificil/';
+        const files = ['1.txt', '2.txt', '3.txt', '4.txt'];
+    
+        const randomFile = basePath + files[Math.floor(Math.random() * files.length)];
+        console.log('Fetching exercise from:', randomFile);
+    
+        return fetch(randomFile)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
             .then(text => {
                 exercises = text.replace(/\r\n/g, '\n').split(/\n\s*\n/);
             })
             .catch(error => console.error('Error al cargar ejercicios:', error));
-    }
-
-    function getRandomExercise() {
-        const randomIndex = Math.floor(Math.random() * exercises.length);
-        return exercises[randomIndex].trim();
     }
 
     function initGame() {
@@ -47,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
             instructions.style.display = 'block';
         }
 
-        const TEXT = getRandomExercise();
+        const TEXT = exercises[Math.floor(Math.random() * exercises.length)];
         const lines = TEXT.split('\n');
         currentTime = gameTime;
         gameStarted = false;
