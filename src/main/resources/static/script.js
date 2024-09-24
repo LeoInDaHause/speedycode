@@ -135,21 +135,21 @@ document.addEventListener('DOMContentLoaded', function() {
     function handleBackspace($currentWord, $currentLetter, event) {
         let $prevWord = $currentWord.previousElementSibling;
         const $prevLetter = $currentLetter.previousElementSibling;
-    
+
         if (!$prevWord && !$prevLetter) {
             event.preventDefault();
             return;
         }
-    
+
         while ($prevWord && ($prevWord.tagName === 'BR' || $prevWord.innerText.trim() === '')) {
             $prevWord = $prevWord.previousElementSibling;
         }
-    
+
         if ($currentLetter.innerText === '' && $prevWord && $prevWord.tagName === 'BR') {
             event.preventDefault();
             $p.removeChild($prevWord);
             $currentWord.classList.remove('active');
-    
+
             const $lastWord = $p.querySelector('word:last-of-type');
             if ($lastWord) {
                 const $lastLetter = $lastWord.querySelector('letter:last-child');
@@ -158,23 +158,23 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             return;
         }
-    
+
         const $wordMarked = $p.querySelector('word.marked');
         if ($wordMarked && !$prevLetter) {
             event.preventDefault();
             $prevWord.classList.remove('marked');
             $prevWord.classList.add('active');
-    
+
             const $letterGo = $prevWord.querySelector('letter:last-child');
-    
+
             $currentLetter.classList.remove('active');
             $letterGo.classList.add('active');
-    
+
             $input.value = Array.from($prevWord.querySelectorAll('letter.correct, letter.incorrect')).map($el => {
                 return $el.classList.contains('correct') ? $el.innerText : '*';
             }).join('');
         }
-    
+
         if ($currentWord && $currentWord.previousElementSibling && $currentWord.previousElementSibling.tagName === 'BR') {
             const $prevLineLastWord = $currentWord.previousElementSibling.previousElementSibling;
             if ($prevLineLastWord && $currentLetter === $currentWord.querySelector('letter:first-child')) {
@@ -186,54 +186,57 @@ document.addEventListener('DOMContentLoaded', function() {
                 $lastLetter.classList.add('active');
             }
         }
-    
         if ($input.value === '') {
             $currentWord.classList.remove('correct', 'incorrect');
+        }
+        if ($currentWord.innerText.length === 1) {
+            $currentWord.classList.remove('correct', 'incorrect');
+            $currentLetter.classList.remove('correct', 'incorrect');
         }
     }
 
     function handleEnter($currentWord, $currentLetter, event) {
         event.preventDefault();
-    
+
         const $lastLetter = $currentWord.lastElementChild;
         const $lastWordInLine = $currentWord.nextElementSibling && $currentWord.nextElementSibling.tagName === 'BR';
-    
+
         if ($currentLetter !== $lastLetter || !$lastWordInLine) {
             return;
         }
-    
+
         const currentWordText = Array.from($currentWord.querySelectorAll('letter')).map($letter => $letter.innerText).join('');
         const inputWordText = $input.value.trim();
-    
+
         if (currentWordText === inputWordText) {
             $currentWord.classList.add('correct');
         } else {
             $currentWord.classList.add('incorrect');
         }
-    
+
         let $nextWord = $currentWord.nextElementSibling;
-    
+
         while ($nextWord && $nextWord.tagName !== 'BR') {
             $nextWord = $nextWord.nextElementSibling;
         }
-    
+
         if ($nextWord) {
             $nextWord = $nextWord.nextElementSibling;
             while ($nextWord && ($nextWord.innerText.trim() === '' || $nextWord.tagName === 'BR')) {
                 $nextWord = $nextWord.nextElementSibling;
             }
-    
+
             if ($nextWord) {
                 const $nextLetter = $nextWord.querySelector('letter');
-    
+
                 $currentWord.classList.remove('active', 'marked');
                 $currentLetter.classList.remove('active');
-    
+
                 $nextWord.classList.add('active');
                 if ($nextLetter) {
                     $nextLetter.classList.add('active');
                 }
-    
+
                 $input.value = '';
             }
         }
