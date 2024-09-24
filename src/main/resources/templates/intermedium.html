@@ -7,13 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <div>Speedy code</div>
-    <div id="instructions" class="instructions">
-        "Space" -> Move to the next word / "Enter" -> Move to the next line after the last character / "Backslide" ->  Go back to the previous letter, word, or line
-    </div>
     <main>
         <section id="game">
+            <a class="redireccion" href="index.html" th:href="@{/index}">Speedy Code</a></a>
+            <div id="instructions" class="instructions">
+                "Space" -> Move to the next word / "Enter" -> Move to the next line after the last character / "Backslide" ->  Go back to the previous letter, word, or line
+            </div>
             <div class="container">
+
                 <svg width="24" height="24" viewBox="0 0 24 24" class="custom-color" fill="currentColor">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                     <path d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-5 2.66a1 1 0 0 0 -.993 .883l-.007 .117v5l.009 .131a1 1 0 0 0 .197 .477l.087 .1l3 3l.094 .082a1 1 0 0 0 1.226 0l.094 -.083l.083 -.094a1 1 0 0 0 0 -1.226l-.083 -.094l-2.707 -2.708v-4.585l-.007 -.117a1 1 0 0 0 -.993 -.883z"/>
@@ -72,6 +73,7 @@
             <input autofocus>
         </section>
         <section id="results">
+            <h4 class="resul">Results</h4>
             <h2>Difficulty</h2>
             <h3 id="results-difficulty"></h3>
 
