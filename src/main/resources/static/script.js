@@ -76,7 +76,6 @@ document.addEventListener('DOMContentLoaded', function() {
             $input.focus();
         });
 
-        // Add touchstart event for mobile devices
         document.addEventListener('touchstart', () => {
             $input.focus();
         });
@@ -345,7 +344,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (instructions) {
             instructions.style.display = 'none';
         }
-
     }
 
     loadExercises().then(() => {
