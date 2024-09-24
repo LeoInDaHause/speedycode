@@ -234,9 +234,9 @@ public class mainController {
         return "h1";
     }
 
-    @GetMapping("/h2")
-    public String h2() {
-        return "h2";
+    @GetMapping("/h21")
+    public String h21() {
+        return "h21";
     }
 
     @GetMapping("/h3")
