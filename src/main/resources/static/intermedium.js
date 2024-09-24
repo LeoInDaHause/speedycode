@@ -320,7 +320,7 @@ document.addEventListener('DOMContentLoaded', function() {
         $game.style.display = 'none';
         $results.style.display = 'flex';
 
-        const difficulty = "Hola";
+        const difficulty = "Intermedium";
         const correctLetters = $p.querySelectorAll('letter.correct').length;
         const incorrectLetters = $p.querySelectorAll('letter.incorrect').length;
         const totalLetters = $p.querySelectorAll('letter').length;
