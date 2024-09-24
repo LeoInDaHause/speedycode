@@ -229,6 +229,66 @@ public class mainController {
         return "hard";
     }
 
+    @GetMapping("/h1")
+    public String h1() {
+        return "h1";
+    }
+
+    @GetMapping("/h2")
+    public String h2() {
+        return "h2";
+    }
+
+    @GetMapping("/h3")
+    public String h3() {
+        return "h3";
+    }
+
+    @GetMapping("/h4")
+    public String h4() {
+        return "h4";
+    }
+
+    @GetMapping("/i1")
+    public String i1() {
+        return "i1";
+    }
+
+    @GetMapping("/i2")
+    public String i2() {
+        return "i2";
+    }
+
+    @GetMapping("/i3")
+    public String i3() {
+        return "i3";
+    }
+
+    @GetMapping("/i4")
+    public String i4() {
+        return "i4";
+    }
+
+    @GetMapping("/e1")
+    public String e1() {
+        return "e1";
+    }
+
+    @GetMapping("/e2")
+    public String e2() {
+        return "e2";
+    }
+
+    @GetMapping("/e3")
+    public String e3() {
+        return "e3";
+    }
+
+    @GetMapping("/e4")
+    public String e4() {
+        return "e4";
+    }
+
     @GetMapping("/log_out")
     public String logOut(HttpSession session) {
         session.removeAttribute("user");

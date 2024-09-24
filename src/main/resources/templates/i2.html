@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Speedy code</title>
+    <style>
+        :root {
+            color-scheme: light dark;
+            --green: #00b755;
+            --yellow: #daaf38;
+            --red: #ca4754;
+            --black: #222;
+            --grey: #999;
+            --white: #FFFFFF;
+            --cyan: #16af93;
+            --blue: #1E3A5F;
+        }
+        
+        div{
+            color: var(--cyan);
+            font-size: 40px;
+            
+        }
+
+        body {
+            background: var(--black);
+            font-size: 25px;
+            font-family: Menlo, monospace;
+            display: grid;
+            padding: 32px;
+            justify-content: center;
+            margin-top: 32px;
+        }
+
+        .instructions {
+            font-size: 18px;
+            color: var(--grey);
+            margin-top: 8px;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        
+        time{
+            display: block;
+            color: var(--cyan);
+            font-size: 35px;
+            margin-bottom: 3px;
+        }
+        
+        input {
+            z-index: -999;
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            /*opacity: 0;*/
+        }
+
+        p {
+            display: block;
+            margin: 0;
+            white-space: pre-wrap;
+            font-family: monospace;
+            color: var(--white);
+        }
+
+        word {
+            display: inline-block; 
+            white-space: nowrap;
+            border-bottom: 2.5px solid transparent;
+            transition: border-color 0.3s ease-in-out;
+            &.marked {
+                border-color: var(--red);
+            }
+        }
+
+        word.incorrect {
+            border-bottom: 2.5px solid var(--red);
+        }
+
+        letter {
+            display: inline-block;
+            white-space: nowrap;
+            position: relative;
+        }
+
+        letter.correct {
+            color: var(--green);
+        }
+
+        letter.incorrect {
+            color: var(--red);
+        }
+
+        letter.active::before {
+            content: '|';
+            font-size: 25px;
+            color: var(--cyan);
+            position: absolute;
+            animation: 1s blink infinite ease-in-out;
+            left: -55%;
+        }
+
+        #game {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        #results {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+        }
+        
+        h2 {
+            font-weight: 400;
+            opacity: .4;
+            margin: 0;
+            font-size: 30px;
+            color: var(--cyan);
+            text-align: center;
+        }
+
+        h3 {
+            font-weight: 400;
+            margin: 0;
+            font-size: 30px;
+            color: var(--white);
+            text-align: center;
+        }
+
+        button {
+            border: 0;
+            background: transparent;
+            padding: 6px;
+            opacity: .4;
+            display: inline-block;
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .button-large {
+            background: transparent;
+            border: 0;
+            margin-top: 32px;
+            padding: 10px 400px;
+            opacity: .4;
+            display: inline-block;
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+            cursor: pointer;
+            border-radius: 16px;
+            stroke: rgb(252, 252, 252);
+            fill: none;
+            &:hover {
+                background: #444;
+                opacity: 1;
+                transform: scale(110%);
+            }
+        }
+
+        .button-small {
+            background: transparent;
+            border: 0;
+            padding: 6px;
+            opacity: .4;
+            display: inline-block;
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+            border-radius: 4px;
+            stroke: rgb(69, 229, 235);
+            fill: none;
+            cursor: pointer;
+
+            &:hover {
+                background: #444;
+                opacity: 1;
+                transform: scale(110%);
+            }
+        }
+
+        @keyframes blink {
+            0%, 25% {
+                opacity: 1;
+            }
+            70% {
+                opacity: 0;
+            }
+        }
+
+        #agradecimientos {
+        font-size: 18px;
+        color: var(--grey);
+        margin-top: 8px;
+        margin-bottom: 16px;
+        text-align: left;
+        clear: both;
+        }
+
+        #agradecimientos h2 {
+            margin-bottom: 8px;
+        }
+
+        #agradecimientos p {
+            margin-top: 0;
+        }
+
+        .cyan-link {
+            color: var(--cyan);
+        }
+
+        .container {
+            border-radius: 7px;
+            background-color: rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-left: 40px;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 17px;
+        }
+
+        .custom-text {
+            font-size: 20px;
+            color: cadetblue;
+        }
+
+        .custom-color {
+            fill: cadetblue;
+        }
+
+
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div>Speedy code</div>
+    <div id="instructions" class="instructions">
+        "Space" -> Move to the next word / "Enter" -> Move to the next line after the last character / "Backslide" ->  Go back to the previous letter, word, or line
+    </div>
+    <main>
+        <section id="game">
+            <div class="container">
+                <svg width="24" height="24" viewBox="0 0 24 24" class="custom-color" fill="currentColor">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-5 2.66a1 1 0 0 0 -.993 .883l-.007 .117v5l.009 .131a1 1 0 0 0 .197 .477l.087 .1l3 3l.094 .082a1 1 0 0 0 1.226 0l.094 -.083l.083 -.094a1 1 0 0 0 0 -1.226l-.083 -.094l-2.707 -2.708v-4.585l-.007 -.117a1 1 0 0 0 -.993 -.883z"/>
+                </svg>
+                <span class="custom-text">Time</span>
+                <div id="time-buttons" class="button-container">
+                    <button id="15-button">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="button-small">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M12 15h2a1 1 0 0 0 1 -1v-1a1 1 0 0 0 -1 -1h-2v-3h3" />
+                            <path d="M9 9v6" />
+                            <path d="M3 12v.01" />
+                            <path d="M12 21v.01" />
+                            <path d="M7.5 4.2v.01" />
+                            <path d="M16.5 19.8v.01" />
+                            <path d="M7.5 19.8v.01" />
+                            <path d="M4.2 16.5v.01" />
+                            <path d="M19.8 16.5v.01" />
+                            <path d="M4.2 7.5v.01" />
+                            <path d="M21 12a9 9 0 0 0 -9 -9" />
+                        </svg>
+                    </button>
+                    <button id="30-button">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="button-small">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M14 10.5v3a1.5 1.5 0 0 0 3 0v-3a1.5 1.5 0 0 0 -3 0z" />
+                            <path d="M8 9h1.5a1.5 1.5 0 0 1 0 3h-.5h.5a1.5 1.5 0 0 1 0 3h-1.5" />
+                            <path d="M3 12v.01" />
+                            <path d="M7.5 4.2v.01" />
+                            <path d="M7.5 19.8v.01" />
+                            <path d="M4.2 16.5v.01" />
+                            <path d="M4.2 7.5v.01" />
+                            <path d="M12 21a9 9 0 0 0 0 -18" />
+                        </svg>
+                    </button>
+                    <button id="60-button">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="button-small">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M14 10.5v3a1.5 1.5 0 0 0 3 0v-3a1.5 1.5 0 0 0 -3 0z" />
+                            <path d="M11 9h-2a1 1 0 0 0 -1 1v4a1 1 0 0 0 1 1h1a1 1 0 0 0 1 -1v-1a1 1 0 0 0 -1 -1h-2" />
+                            <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
+                        </svg>
+                    </button>
+                    <button id="90-button">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="button-small">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M8 14.25c0 .414 .336 .75 .75 .75h1.5a.75 .75 0 0 0 .75 -.75v-4.5a.75 .75 0 0 0 -.75 -.75h-1.5a.75 .75 0 0 0 -.75 .75v1.5c0 .414 .336 .75 .75 .75h2.25" />
+                            <path d="M14 10.5v3a1.5 1.5 0 0 0 3 0v-3a1.5 1.5 0 0 0 -3 0z" />
+                            <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <time></time>
+            <p></p>
+            <input autofocus>
+        </section>
+        <section id="results">
+            <h2>Difficulty</h2>
+            <h3 id="results-difficulty"></h3>
+
+            <h2>Time</h2>
+            <h3 id="results-time"></h3>
+            
+            <h2>CPM</h2>
+            <h3 id="results-cpm"></h3>
+            
+            <h2>Acuraccy</h2>
+            <h3 id="results-accuracy"></h3>
+
+            <h2>Characters</h2>
+            <h3 id="results-caracteres">
+                Correct: <span id="correct-characters">0</span> /
+                Incorrect: <span id="incorrect-characters">0</span> /
+                Missed: <span id="skipped-characters">0</span> /
+                Total: <span id="total-characters">0</span>
+            </h3>
+            
+            <button id="reload-button">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round" class="button-large">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M19.933 13.041a8 8 0 1 1 -9.925 -8.788c3.899 -1 7.935 1.007 9.425 4.747" />
+                    <path d="M20 4v5h-5" />
+                </svg>
+            </button>
+            <div id="agradecimientos">
+                <h2>Acknowledgments</h2>
+                <p>This project was made with the help of the tutorial by <a href="https://www.youtube.com/watch?v=157qVlTelOg" target="_blank" class="cyan-link"> @Midulive</a>.</p>
+            </div>
+        </section>
+    </main>
+    <script src="/ejercicios/intermedio/i2.js"></script>
+</body>
+</html>
